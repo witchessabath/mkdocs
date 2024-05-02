@@ -1,17 +1,24 @@
-# Welcome to MkDocs
+# Homepage
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+## Code Example
 
-## Commands
+### Codeblock
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+Some `code` example!
 
-## Project layout
+### Another one :)
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+Here we go:
+
+```py
+
+def newfunction():
+##comment
+return hello
+```
+Unspeciefied language:
+
+```
+def whatever():
+return world
+```
