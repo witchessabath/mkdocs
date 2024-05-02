@@ -3,8 +3,12 @@
 Here you can find all the projects I did or am currently working on with my little Raspberry Pi 2B+, aka "CutiePi"!
 I am currently running most of them as Docker Containers, this page will be dedicated to the bare metal installs.
 
-## Operating System
+## Operating System & Troubleshooting
 I use Raspberry Pi OS Lite, a Debian ARM based distro and the official OS from the Raspberry Pi Foundation.
+I used to have DietPi OS installed, but ran into problems after the Debian Bookworm release. I couldn´t boot my Pi anymore, so I put the SD card into my laptop
+and mounted it as a new directory. (`mkdir /mnt/pi` and `sudo mnt /mnt/pi`).
+Then I installed Raspberry Pi OS on the SD card and copied all my config files to it. 
+To clean up on my laptop I used the `sudo umount /mnt/pi` and `sudo rm -rf /mnt/pi` commands.
 
 ## DNS
 ### PiHole
