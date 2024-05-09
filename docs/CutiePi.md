@@ -46,3 +46,13 @@ I registered with "NoIp" for a DynDNS Service and installed their DynDNS client 
 I added the cronjob `@reboot /usr/local/bin/noip2` to my crontab to make it automatically starts on reboot.
 
 ## Syncthing
+I use Syncthing to sync files from my Pi to my Laptop, which is especially handy via VPN.
+I installed Syncthing on my Pi and my Laptop. I could then access Syncthing on my Laptop browser via `http://localhost:8384/`.
+Then I configured a folder to sync with my Pi and tried to sync the devices with the "Add device" button.
+As my Pi is headless, I thought I could simply add it via Device ID (I looked at `man synthing`, and you can display it with `syncthing --device-id`).
+But it didn´t work, the logs said connection was refused by my Pi.
+I then set a GUI for my Pi´s Syncthing with `syncthing --gui-address=192.168.10.53:8384` and configured the rest from here.
+I needed to change the default user and password on both Syncthing instances in order to sync them.
+
+## Pi HATs and LED Matrix
+## SSH Settings
