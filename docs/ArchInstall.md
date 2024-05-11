@@ -31,7 +31,7 @@ To do this:
     ```
 Now rofi can also launch the AppImage.
 
-## Scripting notfications for battery usage
+### Scripting notfications for battery usage
 I noticed when writing a script to notify me when battery is low, that notifications can't be delivered.
 The script is:
 ```
@@ -43,20 +43,14 @@ echo "${capacity}"
 if [[ "${bat_status}"=="Discharging" && ${capacity} -le 25 ]]; then
     echo "Battery alert - ${capacity}%"
     notify-send \
-        "󰩃   Gati Warning: Battery! Only ${capacity}% battery remaining!"
+        "Warning: Battery! Only ${capacity}% battery remaining!"
 fi 
 if [[ "${bat_status}"=="Discharging" && ${capacity} -le 10 ]]; then
     echo "Battery alert - ${capacity}%"
     notify-send \
-        "󰩃   Urgent Gati Warning! Only ${capacity}% battery remaining! Feed me!"
+        "Urgent Warning! Only ${capacity}% battery remaining! Feed me!"
 fi
 ```
 Everything was working but the `notify-send` command.
 I tried making the notification daemon a D-Bus service by configuring a `org.freedesktop.Notifications.service` file in the D-Bus service directory, but it still didn't reliably start.
 I then realized I could simply autostart dunst via my windows manager (`exec-always --no-startup-id dunst`).
-
-## i3 Keybinds
-
-## zsh Syntax Highlighting, Vi Mode
-
-## Why I use Arch in the first place

@@ -9,4 +9,6 @@ I used Openmediavualt (OMV) to make a NAS out of my Raspberry Pi 3b+, to which I
     - Connect drive to PC, find out the device name by using `sudo fdisk -l`
     - Use dd command to write zeros to the drive: `sudo dd if=/dev/null of=/dev/sbd2 bs=5M status=progress`
 
-## Setup a SMB share
+## SMB Share Setup
+
+## iSCSI Share Setup

@@ -27,6 +27,21 @@ Traefik is configured in `traefik.yml`, which I mapped in my Docker Compose file
 You can view my Traefik configuration file here.
 
 ### Labels
+To use my self-signed TLS certificates for my Docker containers, I give them the following labels:
+```
+- traefik.enable=true
+```
+Note that the containers must be in the same Docker network as the Traefik container.
+For non-Docker containers or services I didn't attach labels to (like Portainer), I configured it like this:
+```
+portainer:
+    image: portainer/portainer-ce:latest
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+```
 
 ## Portainer
 I use Portainer to have an overview and comfortable GUI management interface for all my Docker containers.
@@ -43,7 +58,7 @@ The database I use with it is Redis. (This is one of the benefits of using Docke
 I run a Nextcloud instance in a container.
 For this, I use the Nextcloud container that contains an Apache image to run the webserver.
 I installed it with `docker run -d -p 2525:80 --name nextcloud --restart=unless-stopped -v /var/lib/docker/volumes/nextcloud:/var/lib/docker/volumes/nextcloud nextcloud`.
-Anything I put in the Nextcloud volume on my Pi will appear on `cutiepi:2525` on my webbrowser, after executing the command: `docker exec -u www-data nextcloud php occ files:scan --all`. I created an alias for this command in my .bashrc.
+Anything I put in the Nextcloud volume on my Pi will appear on `cutiepi:2525` on my webbrowser, after executing the command: `docker exec -u www-data nextcloud php occ files:scan --all`. I created an **alias** for this command in my .bashrc.
 
 ## Uptime Kuma
 I use Uptime Kuma, a simple yet powerful monitoring tool, to receive notifications about my services.
