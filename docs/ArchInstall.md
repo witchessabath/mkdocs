@@ -1,4 +1,4 @@
-# Arch Config
+# Arch Linux Configuration
 
 A video of my complete Arch Install will be found here soon.
 
@@ -12,11 +12,10 @@ I used and configured the following software:
 - dunst Notification daemon
 - Neovim with AstroNvim as Text Editor
 
-## Short explanations:
 
-A quick section to explain some things I had to setup myself when using Arch:
+> A quick section to explain some things I had to setup myself when using Arch:
 
-### How to display AppImages in Rofi
+## How to display AppImages in Rofi
 I use rofi as an app launcher. It works great, but by default only displays and starts apps installed by package manager.
 After installing AppImages, I wanted them to be accessible as well.
 To do this:
@@ -31,7 +30,7 @@ To do this:
     ```
 Now rofi can also launch the AppImage.
 
-### Scripting notfications for battery usage
+## Scripting notfications for battery usage
 I noticed when writing a script to notify me when battery is low, that notifications can't be delivered.
 The script is:
 ```

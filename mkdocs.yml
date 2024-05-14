@@ -2,7 +2,8 @@ site_name: Lily's Tech Blog
 theme:
   name: material
   features: 
-   - navigation.tabs
+    - navigation.tabs
+    - navigation.expand
     - navigation.sections
     - navigation.top
     - search.suggest
@@ -17,13 +18,13 @@ theme:
         icon: material/toggle-switch-off-outline
         name: Dark mode
       primary: teal
-      accent: purple
+      accent: indigo
     - scheme: slate
       toggle:
         icon: material/toggle-switch
         name: Light mode
       primary: teal
-      accent: purple
+      accent: indigo
 
 extra:
   social:
@@ -44,10 +45,14 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.superfences
   - pymdownx.mark
-  - attr_list
-  - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - attr_list2
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
+plugins:
+  - search
+  - awesome-pages
 
 copyright: |
-  &copy; 2024 <a href="https://github.com/witchessabath" target="_blank" rel="noopener">Lily Sabath</a>
+ &copy; 2024 <a href="https://github.com/witchessabath" target="_blank" rel="noopener">Lily Sabath</a>

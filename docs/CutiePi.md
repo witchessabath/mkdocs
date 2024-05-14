@@ -55,7 +55,7 @@ I then set a GUI for my Pi´s Syncthing with `syncthing --gui-address=192.168.10
 I needed to change the default user and password on both Syncthing instances in order to sync them.
 
 ## Pi HATs and LED Matrix
-I used to use an Adadruit HAT to display the terminal, and with the help of a script, it can display Pi network and PiHole stats.
+I used to use an Adafruit HAT to display the terminal, and with the help of a script, it can display Pi network and PiHole stats.
 I no longer use it because the version I have doesn't have backlight control, and I found it to be too bright.
 I also have an Adafruit LED matrix, that can be connected to the Pi with a bonnet and then run with python programs, some default ones are provided by Adafruit.
 I created an alias in my .aliasrc to light the matrix:
