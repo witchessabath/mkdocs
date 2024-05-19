@@ -2,23 +2,21 @@
 
 A video of my complete Arch Install will be found here soon.
 
-You can also view my config files here: www.github.com/witchessabath/linuxdotfiles
+You can also view my config files here: <a href="www.github.com/witchessabath/linuxdotfiles" target="_blank"></a>
 I used and configured the following software:
 - i3-gaps Window manager
 - i3statusbar
 - rofi App Launcher
 - zsh shell
 - kitty terminal
-- dunst Notification daemon
 - Neovim with AstroNvim as Text Editor
-
 
 > A quick section to explain some things I had to setup myself when using Arch:
 
 ## How to display AppImages in Rofi
 I use rofi as an app launcher. It works great, but by default only displays and starts apps installed by package manager.
-After installing AppImages, I wanted them to be accessible as well.
-To do this:
+After installing AppImages, I wanted them to be accessible from rofi as well.
+To enable this, I did the following:
 - `chmod +x Example.AppImage` to make the AppImage executable
 - `sudo nvim /usr/share/applications/Example.desktop` to create a desktop file for the AppImage
     Content:
@@ -52,4 +50,4 @@ fi
 ```
 Everything was working but the `notify-send` command.
 I tried making the notification daemon a D-Bus service by configuring a `org.freedesktop.Notifications.service` file in the D-Bus service directory, but it still didn't reliably start.
-I then realized I could simply autostart dunst via my windows manager (`exec-always --no-startup-id dunst`).
+I then realized I could simply autostart dunst via my windows manager i3 (`exec-always --no-startup-id dunst`).

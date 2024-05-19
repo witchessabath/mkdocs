@@ -28,7 +28,7 @@ You can view my Traefik configuration file here.
 
 ### Labels
 To use my self-signed TLS certificates for my Docker containers, I give them the following labels:
-```
+```yml
 - traefik.enable=true
 - traefik.http.routers.paperless.entrypoints=web,websecure #configure for HTTP or HTTPS traffic/HTTPS redirection
 - traefik.http.routers.paperless.rule=Host(`app.witchessabath.com`)
@@ -41,7 +41,7 @@ To use my self-signed TLS certificates for my Docker containers, I give them the
 Note that the containers must be in the same Docker network as the Traefik container.
 For non-Docker containers or services I didn't attach labels to (like Portainer), I configured it like this:
 
-```
+```yml
 portainer:
     image: portainer/portainer-ce:latest
     command: -H unix:///var/run/docker.sock
@@ -72,7 +72,7 @@ Anything I put in the Nextcloud volume on my Pi will appear on `cutiepi:2525` on
 I use Uptime Kuma, a simple yet powerful monitoring tool, to receive notifications about my services.
 You can configure lots of notification options, I chose Mail and Telegram notifications.
 I used the following Docker Compose file to install it:
-```
+```yml
 version: '3.3'
 
 services:
