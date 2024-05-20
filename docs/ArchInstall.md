@@ -14,7 +14,7 @@ I used and configured the following software:
 > A quick section to explain some things I had to setup myself when using Arch:
 
 ## How to display AppImages in Rofi
-I use rofi as an app launcher. It works great, but by default only displays and starts apps installed by package manager.
+I use rofi as an app launcher. It works great, but by default only displays and starts apps installed by the package manager.
 After installing AppImages, I wanted them to be accessible from rofi as well.
 To enable this, I did the following:
 - `chmod +x Example.AppImage` to make the AppImage executable
