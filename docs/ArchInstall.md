@@ -2,13 +2,7 @@
 
 A video of my complete Arch Install will be found here soon.
 
-I used and configured the following software:
-- i3-gaps Window manager
-- i3statusbar
-- rofi App Launcher
-- zsh shell
-- kitty terminal
-- Neovim with AstroNvim as Text Editor
+You can find some of my dotfiles <a href="https://github.com/witchessabath/linuxdotfiles" target="_blank">here</a>.
 
 > A quick section to explain some things I had to setup myself when using Arch:
 
