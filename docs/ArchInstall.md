@@ -2,7 +2,6 @@
 
 A video of my complete Arch Install will be found here soon.
 
-You can also view my config files here: <a href="www.github.com/witchessabath/linuxdotfiles" target="_blank"></a>
 I used and configured the following software:
 - i3-gaps Window manager
 - i3statusbar

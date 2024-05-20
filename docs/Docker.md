@@ -99,7 +99,6 @@ docker run -d \
 <p>
 I use Homarr to have a dashboard overview of the services I need to access on my Pi.
 It also has cool API integrations, for example to display PiHole data.
-< screenshot>
 I installed it using Docker Compose, then configured it via the GUI webinterface.
 As I wanted to use a custom icon for the tab bar and on the site itself, I downloaded `dino.png` on my laptop and moved it to `~/homarr/icons` on my Pi, which I mapped to the logo directory in homarr using the line `- ./icons:/app/public/imgs/logo` under the `volumes:` section of my Docker Compose file.
 You could also connect to the container CLI, navigate to the logo directory and use `wget <icon URL>` to download the icon in the container directly.

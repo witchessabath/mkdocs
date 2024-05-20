@@ -47,7 +47,6 @@ markdown_extensions:
   - pymdownx.mark
   - attr_list
   - pymdownx.superfences
-  - md_in_html
   - pymdownx.tabbed:
       alternate_style: true
 
