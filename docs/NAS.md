@@ -2,6 +2,9 @@
 
 I used Openmediavualt (OMV) to make a NAS out of my Raspberry Pi 3B+, to which I simply attached a HDD.
 
+![Screenshot](img/omv.png)
+*Above: Screenshot of my OMV Dashboard*
+
 ## Preparations
 - Install Raspberry Pi OS Lite
 - Install OMV using the <a href="https://github.com/OpenMediaVault-Plugin-Developers/installScript/raw/master/install" target="_blank">installation script.</a>
@@ -56,4 +59,6 @@ Go to `Services > tgt > Targets` and configure a target, with the image you just
 - Create a directory and then mount the LUN to it (`sudo mkdir /mnt/iscsi`, then `sudo mnt /dev/sdX /mnt/iscsi`)
 - I got an error saying the image has the 'wrong fs type', as it has no filesystem configured, so I simply used `sudo mkfs -t ext4 /dev/sdX` to give it an ext4 filesystem
 - You can now put files here. You can logout with `sudo iscsiadm -m node -T <ISCSI Target IQN> -p <OMV IP Adress> --logout`, and also just unmount and mount the LUN if you wish.
+
+
 
