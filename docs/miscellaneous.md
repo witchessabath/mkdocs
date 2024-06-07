@@ -14,9 +14,9 @@ I did the following steps to make it work:
 - Write the code, which you can find <a href="https://github.com/witchessabath/misc/blob/main/WeatherDisplay.ino" target="_blank">here</a>.
 
 !!! note
-    Make sure to enter the correct data types for the JSON values (e.g. double vor Temperature) - the Arduino_JSON.h library doesn't allow the Convert.toDouble method.
-    Also, note that OpenWeatherMap display Temperature in Kelvin - hence the line `double temperatureC = (temperatureK - 273.15);` to convert it to Celsius.
-    Another tip: In the Arduino IDE, go to 'Tools -> Serial Monitor' to view the 'Serial.println' lines. Make sure you have the correct Baud rate selected.
+    Make sure to enter the correct data types for the JSON values (e.g. double for Temperature) - the Arduino_JSON.h library doesn't allow the `Convert.toDouble` method.<br />
+    Also, note that OpenWeatherMap display Temperature in Kelvin - hence the line `double temperatureC = (temperatureK - 273.15);` to convert it to Celsius.<br />
+    Another tip: In the Arduino IDE, go to 'Tools -> Serial Monitor' to view the `Serial.println` lines. Make sure you have the correct Baud rate selected.
 
 ## Video Game
 
