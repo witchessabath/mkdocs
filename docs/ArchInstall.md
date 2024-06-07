@@ -43,4 +43,4 @@ fi
 ```
 Everything was working but the `notify-send` command.
 I tried making the notification daemon a D-Bus service by configuring a `org.freedesktop.Notifications.service` file in the D-Bus service directory, but it still didn't reliably start.
-I then realized I could simply autostart dunst via my windows manager i3 (`exec-always --no-startup-id dunst`).
+I then realized I hadn't enabled dunst via `sudo systemctl enable dunst.service`. Only using the `systemctl start` command will start the service in that session, but to be able to automatically a service, the `enable` command is needed. Then, I could simply autostart dunst via my window manager i3 (`exec-always --no-startup-id dunst`).

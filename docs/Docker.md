@@ -9,7 +9,7 @@ This way, I have each application installed in a sandboxed environment for more 
 I use Traefik as a reverse proxy and loadbalancer.
 I also configured self-signed SSL certificates with it, using the ACME protocol.
 I did it before by using **certbot**, but ACME certificates don't need to be manually renewed.
-I did this by registering the 'witchessabath' Domain, setting the right TXT records, and getting a **Cloudflare API Key** for TLS encryption.
+I did this by registering the 'witchessabath' Domain with Cloudflare, setting the right TXT records, and getting the **Cloudflare Global API Key** for TLS encryption.
 In my Traefik Docker Compose file I then added:
 ```
 environment:
@@ -31,6 +31,7 @@ To use my self-signed TLS certificates for my Docker containers, I give them the
 !!! note
     Be careful about the backticks: I originally used single quotes instead of backticks for the 'Host' label, and ran into an error (called 'invalid rune' in Go)
 
+If a container already exists, you can simply edit its labels with **Portainer**.
 Note that the containers must be in the same Docker network as the Traefik container.
 For non-Docker containers or services I didn't attach labels to (like Portainer), I configured it like this:
 

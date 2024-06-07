@@ -1,6 +1,6 @@
 # CutiePi
 
-Here you can find all the projects I did or am currently working on with my little Raspberry Pi 2B+, aka "CutiePi"!
+Here you can find all the projects I did or am currently working on with my little Raspberry Pi, aka "CutiePi"!
 I am currently running most of them as Docker Containers, but this page is dedicated to the bare metal installs.
 
 ## Operating System & Troubleshooting
