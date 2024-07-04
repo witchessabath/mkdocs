@@ -29,7 +29,7 @@ The plugin basically just executes the commands to initialize a remote Borg repo
 - SSH connection with SSH keys established from client to server
 !!! Note
     Borg does not work with a SSH password, SSH keys must be used. Borg needs to know what keys to use, so set an environment variable for it: `export BORG_SSH='ssh -i /path/to/SSH_KEY`
-    I would strongly command using a custom SSH command by changing SSH port for the server in the `/etc/ssh/sshd_config` file.
+    I would strongly recommend using a custom SSH command by changing SSH port for the server in the `/etc/ssh/sshd_config` file.
     A good instruction for creating SSH keys can be found <a href="https://www.linode.com/docs/guides/use-public-key-authentication-with-ssh/" target="_blank">here.</a>
 #### Configuring the Repo
 - Use the `borg info` command mentioned above to make sure the client can reach the backup server.

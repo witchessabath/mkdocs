@@ -1,6 +1,6 @@
-# Other Projects
+# Misc
 
-Here I will share some projects on the side, that don't really have anything to do with the rest of my homelab.
+Here I will share some miscellaneous projects that don't really have anything to do with the rest of my homelab.
 
 ## Arduino Weather Station
 

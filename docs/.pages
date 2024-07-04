@@ -1,9 +1,10 @@
 nav: 
     - index.md
-    - CutiePi.md
-    - Docker.md
     - NAS.md
+    - Docker.md
+    - CutiePi.md
     - Backup.md
+    - proxmox.md
     - ArchInstall.md
     - miscellaneous.md
     
