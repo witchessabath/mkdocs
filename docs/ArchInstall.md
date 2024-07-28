@@ -1,10 +1,11 @@
 # Arch Linux Configuration
 
-A video of my complete Arch Install will be found here soon.
-
 You can find some of my dotfiles <a href="https://github.com/witchessabath/linuxdotfiles" target="_blank">here</a>.
 
 > A quick section to explain some things I had to setup myself when using Arch:
+
+## Keybindings
+
 
 ## How to display AppImages in Rofi
 I use rofi as an app launcher. It works great, but by default only displays and starts apps installed by the package manager.

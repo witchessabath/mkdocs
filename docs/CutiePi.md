@@ -15,9 +15,22 @@ To clean up on my laptop I used the `sudo umount /mnt/pi` and `sudo rm -rf /mnt/
 ### PiHole
 I use PiHole as a DNS-based blocker from ads and malicious sites/tracking sites.
 I configured my Pi as local DNS Server on my router, so all new clients in my network automatically use it.
+I installed PiHole following https://docs.pi-hole.net/main/basic-install/. I wanted to run the web interface on a custom port, so I ran `sudo nvim /etc/lighttpd/lighttpd.conf` and searched for `server.port`. Change this value to the desired port, then access it in the browser with `http://<hostname>:<port>/admin`.
+I added new Adists from https://github.com/RPiList/specials/blob/54876178ffa7e4d1224ac81b00bedd0040f65802/Blocklisten.md here, then updated Gravity (`pihole -g`).
+I added a script and cronjob to delete the FTL database every week (`crontab -e 0 0 * * 0 FTLdb.sh`).
+```
+#!/bin/bash
+
+sudo systemctl stop pihole-FTL
+sudo mv /etc/pihole/pihole-FTL.db /home/lily/scripts/pihole-FTL_$(date +"%y-%m-%d").db
+sudo systemctl start pihole-FTL
+
+cd /home/lily/scripts
+find . -name "pihole-FTL_*.db" -type f -mtime +7 -exec rm {} \;
+```
 ### Unbound DNS
 I use Unbound as a recursive DNS Server. 
-I followed the installation instructions from <a href="https://docs.pi-hole.net/guides/dns/unbound/" target="_blank">here</a>.
+I followed the installation instructions from <a href="https://docs.pi-hole.net/guides/dns/unbound/" target="_blank">here</a> and added it as a custom DNS Server in the PiHole DNS configuration.
 ### DNSSEC
 I enabled the following security options in `/etc/unbound/unbound.conf.d/`:
 ```
@@ -72,11 +85,9 @@ Host NAS
     ...
 ```
 Your client will now use these parameters to connect via SSH to these hosts.
-
-## Pi HATs and LED Matrix
-I used to use an Adafruit HAT ('Hardware Attached on Top') to display the terminal, and with the help of a script, it can display Pi network and PiHole stats.
-I no longer use it because the HAT I have doesn't have backlight control, and I found it to be too bright.
-I also have an Adafruit LED matrix, that can be connected to the Pi with a bonnet (smaller HAT) and then run with python programs, some default ones are provided by Adafruit.
-I created an alias in my .bashrc to light the matrix:
-`alias "li"='sudo python3 ~/rpi-rgb-led-matrix/bindings/python/samples/pulsing-colors.py'`
+## Managing diskspace
+Useful commands to manage my Pi's disk space are `df -h`and `ncdu /`. The latter provides a nice overview of all files and their sizes in the specified directory (in this case, root.)
+Also make sure to run the apt `autoclean` and `autoremove`commands if you want to remove old packages, and package dependencies that are no longer needed.
+I also wanted to limit the space my journal log was taking up. For this, you can run `sudo journalctl --vacuum-time=2weeks` for example, to remove records older than two weeks.
+You can also specify the maximal usage, free space, files and file size allowed for your journal by editing `/etc/systemd/journald.conf`, eg. by uncommenting and setting the line `SystemMaxFileSize=40M`. Then restart the service using `sudo systemctl restart systemd-journald` for the changes to take effect.
 

@@ -48,14 +48,22 @@ portainer:
 ## Portainer
 I use Portainer to have an overview and comfortable GUI management interface for all my Docker containers.
 I find creating and managing Docker networks, assigning labels to containers, as well as reviewing container logs more comfortable through Portainer.
-It also enables you to connect to a console and act as root user in the container, therefore replacing the need to connect to the Docker host and executing the `docker -it` command to access the container's CLI from there.
+It also enables you to connect to a console and act as root user in the container, therefore replacing the need to use the `docker exec -it <containername> sh` command to access the container's CLI.
 Portainer can be installed by creating a volume (`docker volume create portainer_data`) and then the container for it (`docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest`).
 
 ## Nextcloud
 I run a Nextcloud instance in a container.
-For this, I use the Nextcloud container that contains an Apache image to run the webserver.
-I installed it with `docker run -d -p 2525:80 --name nextcloud --restart=unless-stopped -v /var/lib/docker/volumes/nextcloud:/var/lib/docker/volumes/nextcloud nextcloud`.
-Anything I put in the Nextcloud volume on my Pi will appear on `cutiepi:2525` on my webbrowser, after executing the command: `docker exec -u www-data nextcloud php occ files:scan --all`. I created an **alias** for this command in my .bashrc.
+For this, I use the Nextcloud container that contains an Apache image to run the webserver, found here https://github.com/nextcloud/docker.
+I installed using the provided Docker Compose file, but changed the volume mappings to `volumes : - ./cloud:/var/www/html - ./data:/var/www/html/data` so I didn't have to naviaget to /var/lib/docker/volumes/nextcloud/ to find the Nextcloud files on the Docker host.
+Anything I put in the data volume on the host will appear on `hostip:8080` on my webbrowser, and the other way around.
+Note: You need to make sure the correct permissions are set (`sudo chown -R www-data:www-data /home/lily/nextcloud && sudo chmod -R 755 /path/to/host/nextcloud`) so the Nextcloud user ('www-data') has access to the data.
+I also had some problems with data being in the Nextcloud cache but not written on the disk which prevented file sync.
+I resolved this by running some troubleshooting commands on the Docker host:
+```bash
+docker exec -u www-data nextcloud php occ files:cleanup #clear file cache in the Docker container
+docker exec -u www-data nextcloud php occ files:scan --all #rescan all files
+docker exec -u www-data nextcloud php occ maintenance:repair #maintenance repairs, eg. to fix database inconsistencies, adjust file paths, and address other issues that may arise in a Nextcloud installation
+```
 
 ## Paperless
 I use Paperless as a document managagement system.
@@ -67,8 +75,6 @@ I use Uptime Kuma, a simple yet powerful monitoring tool, to receive notificatio
 You can configure lots of notification options, I chose to configure it for Mail via SMTP.
 I used the following Docker Compose file to install it:
 ```yml
-version: '3.3'
-
 services:
   uptime-kuma:
     image: louislam/uptime-kuma:1

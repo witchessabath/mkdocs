@@ -23,6 +23,11 @@ To deploy a container, go to the node in your sidemenu and select the menupoint 
 Here you will find a sub-menu with the point `Container Templates`, where you can browse a big list of Linux images, which you can download.
 These templates can be used for deploying containers with this OS. There's also preconfigured containers that have certain software already installed.
 After the template has finished downloading, you can click the big `Create CT` button on the top right of the Web GUI. This will start a setup wizard where you can choose the node it will run on, create a user/password and SSH keys, and the virtual hardware specs.
+
+!!! Note
+    I chose 'Use Host DNS Settings' in the container setup wizard, but as I wanted to install software, I noticed DNS was not working for me. I had to manually edit the container configuration file on the pve node (`/etc/pve/lxc/<container_id>.conf`). I added the line `lxc.environment = DNS_SERVER=1.1.1.1 1.0.0.1`, then entered the container from the command line with `pct enter <container_id>` and adjusted its `/etc/resolv.conf` file to use these nameservers as well.
+    Then DNS resolution worked and I could run my first `apt update && upgrade` and then install packages.
+
 ## Firewall
 In the Datacenter menu, expand the `Firewall` menu point. 
 I recommend first going to `Security Groups` and creating a new group - which is simply a set of rules. 
