@@ -89,5 +89,5 @@ Your client will now use these parameters to connect via SSH to these hosts.
 Useful commands to manage the Pi's disk space are `df -h`and `ncdu /`. The latter provides a nice overview of all files and their sizes in the specified directory (in this case, root.)
 - Also make sure to run the apt `autoclean` and `autoremove`commands if you want to remove old packages, and package dependencies that are no longer needed.
 - I also wanted to limit the space my journal log was taking up. For this, you can run `sudo journalctl --vacuum-time=2weeks` for example, to remove records older than two weeks.
-You can also specify the maximal usage, free space, files and file size allowed for your journal by editing `/etc/systemd/journald.conf`, eg. by uncommenting and setting the line `SystemMaxFileSize=40M`. Then restart the service using `sudo systemctl restart systemd-journald` for the changes to take effect.
+    You can also specify the maximal usage, free space, files and file size allowed for your journal by editing `/etc/systemd/journald.conf`, eg. by uncommenting and setting the line `SystemMaxFileSize=40M`. Then restart the service using `sudo systemctl restart systemd-journald` for the changes to take effect.
 

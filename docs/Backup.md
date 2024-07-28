@@ -5,7 +5,7 @@
 I use Borg Backup to backup my Laptop, PC and Pi.
 I backup my Laptop and PC to a remotely hosted Nextcloud instance and an external hard drive, and my Pi to a USB drive.
 I initialized the backups using `borg init --encryption repokey /path/to/repo` and then execute the backups via script:
-```
+```bash
 #!/bin/sh
 REPO="xxx"
 SOURCE="xxx"
