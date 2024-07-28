@@ -22,7 +22,6 @@ Make sure to put that user in the `SSH` group in the `Users` Tab, to ensure SSH 
 - Create and mount a file system on that disk under `Storage > File Systems` - I used ext4
 
 ## SMB Share Setup
-I made a SMB Share initially, to transfer some of the phots I edited on my Windows PC to the NAS.
 - Create a folder on the disk under `Storage - Shared Folders`
 - Make the SMB share browseable and configure other settings like minimum SMB version and permission inheritance under `Services > SMB/CIFS > Settings`
 - Create the SMB Share in `Services > SMB/CIFS > Shares`

@@ -25,7 +25,7 @@ Now rofi can also launch the AppImage.
 ## Scripting notfications for battery usage
 I noticed when writing a script to notify me when battery is low, that notifications can't be delivered.
 The script is:
-```
+```bash
 #!/bin/bash
 bat_files="/sys/class/power_supply/BAT1"
 bat_status=$(cat "${bat_files}/status")

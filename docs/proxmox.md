@@ -38,7 +38,7 @@ You can add seperate rules on every layer of the system, from the whole datacent
 !!! note
     An important aspect in Proxmox is that you should create these rules first and then enable the firewall - because it's disabled by default.
     You can do so in the `Firewall > Options` menu. Be careful if you enable the firewall before creating any rules - because the default policy is set to `DROP` (but can be changed here). So you might accidentally lock yourself out of your system, if you don't create some `ACCEPT` rules first. <br />
-![Screenshot](img/Screenshot4.png) <br />
+![Screenshot](img/Screenshot4.png)
 *Above: The Firewall Options menu, where the firewall must first be enabled on the Datacenter level* <br />
 I created a Security Group for my VPN connection to allow HTTP, HTTPS, and TCP traffic on port 8006 to allow access to Proxmox from my VPN.
 (This is very practical as I also enabled Wake on LAN fo the Proxmox node, and now I can access my containers from anywhere when I need them, without having to keep the PC running 24/7.)
@@ -48,6 +48,7 @@ I created a Security Group for my VPN connection to allow HTTP, HTTPS, and TCP t
 *Above: Screenshot of a VPN security group, made by selecting Macros (HTTP/HTTPS) or a protocol and destination port (TCP to port 8006).* <br />
 ## TLS Certificates
 To deploy self signed TLS certificates:
+
 - navigate to `Datacenter > ACME`.
 - click `Challenge Plugins > Add` to add a DNS challenge from your provider. I use Cloudflare, so I entered my Cloudflare mail and created a Cloudflare API token.
     - to create an API token, I logged in to Cloudflare's 'My Profile' page, then navigate to 'API token' in the menu and created a token using the Zone DNS template, giving permission for zones in my account.
