@@ -45,12 +45,6 @@ portainer:
       - portainer_data:/data
 ```
 
-## Portainer
-I use Portainer to have an overview and comfortable GUI management interface for all my Docker containers.
-I find creating and managing Docker networks, assigning labels to containers, as well as reviewing container logs more comfortable through Portainer.
-It also enables you to connect to a console and act as root user in the container, therefore replacing the need to use the `docker exec -it <containername> sh` command to access the container's CLI.
-Portainer can be installed by creating a volume (`docker volume create portainer_data`) and then the container for it (`docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest`).
-
 ## Nextcloud
 I run a Nextcloud instance in a container.
 For this, I use the Nextcloud container that contains an Apache image to run the webserver, found here https://github.com/nextcloud/docker.
@@ -64,6 +58,11 @@ docker exec -u www-data nextcloud php occ files:cleanup #clear file cache in the
 docker exec -u www-data nextcloud php occ files:scan --all #rescan all files
 docker exec -u www-data nextcloud php occ maintenance:repair #maintenance repairs, eg. to fix database inconsistencies, adjust file paths, and address other issues that may arise in a Nextcloud installation
 ```
+## Portainer
+I use Portainer to have an overview and comfortable GUI management interface for all my Docker containers.
+I find creating and managing Docker networks, assigning labels to containers, as well as reviewing container logs more comfortable through Portainer.
+It also enables you to connect to a console and act as root user in the container, therefore replacing the need to use the `docker exec -it <containername> sh` command to access the container's CLI.
+Portainer can be installed by creating a volume (`docker volume create portainer_data`) and then the container for it (`docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest`).
 
 ## Paperless
 I use Paperless as a document managagement system.

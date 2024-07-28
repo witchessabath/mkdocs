@@ -1,4 +1,4 @@
-# CutiePi
+# Raspberry Pi
 
 Here you can find all the projects I did or am currently working on with my little Raspberry Pi, aka "CutiePi"!
 I am currently running most of them as Docker Containers, but this page is dedicated to the bare metal installs.
@@ -18,7 +18,7 @@ I configured my Pi as local DNS Server on my router, so all new clients in my ne
 I installed PiHole following https://docs.pi-hole.net/main/basic-install/. I wanted to run the web interface on a custom port, so I ran `sudo nvim /etc/lighttpd/lighttpd.conf` and searched for `server.port`. Change this value to the desired port, then access it in the browser with `http://<hostname>:<port>/admin`.
 I added new Adists from https://github.com/RPiList/specials/blob/54876178ffa7e4d1224ac81b00bedd0040f65802/Blocklisten.md here, then updated Gravity (`pihole -g`).
 I added a script and cronjob to delete the FTL database every week (`crontab -e 0 0 * * 0 FTLdb.sh`).
-```
+```bash
 #!/bin/bash
 
 sudo systemctl stop pihole-FTL
@@ -75,7 +75,7 @@ A good instruction for SSH key setup can be found <a href="https://www.linode.co
 I also made a SSH config file on my clients so it's less work connecting to multiple servers, as you don't need to remember all the custom ports and so on: `nvim ~/.ssh/config` and then create entries in the following format:
 ```
 Host CutiePi
-    HostName 192.168.10.53
+    HostName 192.168.10.xx
     User Lily
     IdentityFile ~/.ssh/lilyskey #enter the path to the private key
     Port xxx #enter the custom SSH Port you set
@@ -86,8 +86,8 @@ Host NAS
 ```
 Your client will now use these parameters to connect via SSH to these hosts.
 ## Managing diskspace
-Useful commands to manage my Pi's disk space are `df -h`and `ncdu /`. The latter provides a nice overview of all files and their sizes in the specified directory (in this case, root.)
-Also make sure to run the apt `autoclean` and `autoremove`commands if you want to remove old packages, and package dependencies that are no longer needed.
-I also wanted to limit the space my journal log was taking up. For this, you can run `sudo journalctl --vacuum-time=2weeks` for example, to remove records older than two weeks.
+Useful commands to manage the Pi's disk space are `df -h`and `ncdu /`. The latter provides a nice overview of all files and their sizes in the specified directory (in this case, root.)
+- Also make sure to run the apt `autoclean` and `autoremove`commands if you want to remove old packages, and package dependencies that are no longer needed.
+- I also wanted to limit the space my journal log was taking up. For this, you can run `sudo journalctl --vacuum-time=2weeks` for example, to remove records older than two weeks.
 You can also specify the maximal usage, free space, files and file size allowed for your journal by editing `/etc/systemd/journald.conf`, eg. by uncommenting and setting the line `SystemMaxFileSize=40M`. Then restart the service using `sudo systemctl restart systemd-journald` for the changes to take effect.
 
