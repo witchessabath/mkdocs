@@ -46,6 +46,11 @@ I created a Security Group for my VPN connection to allow HTTP, HTTPS, and TCP t
     Be sure to create the rule for port 8006/the port where the Proxmox VE API is exposed: otherwise you won't be able to access the Proxmox web interface, even with HTTP(S) enabled. <br />
 ![Screenshot](img/fw.png) <br />
 *Above: Screenshot of a VPN security group, made by selecting Macros (HTTP/HTTPS) or a protocol and destination port (TCP to port 8006).*
+## TLS Certificates
+To deploy self signed TLS certificates, navigate to `Datacenter > ACME`.
+Then click `Challenge Plugins > Add` to add a DNS challenge from your provider. <br/> I use Cloudflare, so I entered my Cloudflare mail and created a Cloudflare API token.
+    To create an API token, I logged in to Cloudflare's 'My Profile' page, then navigate to 'API token' in the menu and created a token using the Zone DNS template, giving permission for zones in my account.
+Then go to `Accounts > Add` and add the mail address used for the DNS Challenge Plugin. Now, select Let's Encrypt V2 from the Dropdown Menu, and the configuration is finished.
 ## Users and 2FA Authentication
 In the Datacenter Menu, go to `Permissions > Users` to create a new user. In the `Two Factor` menu point beneath that, you can set up 2FA, for example with an authenticator app.
 ## Hostname
