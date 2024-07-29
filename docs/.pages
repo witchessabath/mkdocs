@@ -4,6 +4,7 @@ nav:
     - CutiePi.md
     - proxmox.md
     - NAS.md
+    - automation.md
     - Backup.md
     - ArchInstall.md
     - miscellaneous.md
