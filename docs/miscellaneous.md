@@ -23,5 +23,5 @@ I did the following steps to make it work:
 In 2023, I used Game Maker Studio to make a 2D RPG computer game as a birthday gift.
 The engine uses its own language called Game Maker Studio, and I can highly recommend it, as I had a lot of fun and a great learning experience.
 I chose this engine because  it was used by Toby Fox to make 'Undertale', a great game that majorly inspired my project.
-I can highly recommend Peyton Burnham's YouTube videos on the engine.
+I can highly recommend <a href="https://www.youtube.com/@peytonburnham4316" target="_blank">Peyton Burnham's YouTube videos</a> on the engine.
 I also uploaded a tiny bit of my code into <a href="https://github.com/witchessabath/misc" target="_blank">this GitHub repo</a>, so you can have a sneak peek at what the Game Maker Script Language looks like if you wish.

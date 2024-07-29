@@ -55,7 +55,7 @@ To deploy self signed TLS certificates:
 - go to `Accounts > Add` and add the mail address used for the DNS Challenge Plugin. Now, select Let's Encrypt V2 from the Dropdown Menu, and the configuration is finished.
 ## Users and 2FA Authentication
 In the Datacenter Menu, go to `Permissions > Users` to create a new user. In the `Two Factor` menu point beneath that, you can set up 2FA, for example with an authenticator app.
-## Hostname
+## Hostname Change
 I changed the hostname using the `hostnamectl set-hostname` command, but I did not realize that in Proxmox, the hostname is also the node name.
 That's why after a reboot, the naming was no longer consistent and I could no longer access the web interface. Instead, you need to edit both `/etc/hosts` and `/etc/hostname` and replace all instances of the old hostname.
 If your node is in a cluster, make sure to also change the node name in `/etc/pve/corosync.conf`.

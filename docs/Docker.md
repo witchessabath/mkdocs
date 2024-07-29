@@ -1,7 +1,7 @@
 # Docker Containers
 
-After a while of installing software locally on my Pi, I realised the benefits of using containers instead, so I started using Docker.
-This way, I have each application installed in a sandboxed environment for more security, all dependencies come with the container so there's no "But it works on my machine!" effect, and management is very convenient with multiple services that allow more comfortable updates, logging, monitoring, configuration and networking than if the applications were all installed locally.
+After a while of installing software locally on my Raspberry Pi, I realized the benefits of using containers instead, so I started using Docker.
+This way, I have each application installed in a sandboxed environment for more security, all dependencies come with the container so there's no "But it works on my machine!" effect, and management is very convenient with easy to manage compose or Dockerfiles that can be used with version control (Git).
 
 ## Traefik
 
@@ -31,9 +31,9 @@ To use my self-signed TLS certificates for my Docker containers, I give them the
 !!! note
     Be careful about the backticks: I originally used single quotes instead of backticks for the 'Host' label, and ran into an error (called 'invalid rune' in Go)
 
-If a container already exists, you can simply edit its labels with **Portainer**.
+If a container already exists, you can also edit its labels with **Portainer**.
 Note that the containers must be in the same Docker network as the Traefik container.
-For non-Docker containers or services I didn't attach labels to (like Portainer), I configured it like this:
+For non-Docker containers or services I didn't attach labels to, simply add the service to the traefik Docker Compose file:
 
 ```yml
 portainer:
@@ -47,31 +47,24 @@ portainer:
 
 ## Nextcloud
 I run a Nextcloud instance in a container.
-For this, I use the Nextcloud container that contains an Apache image to run the webserver, found here https://github.com/nextcloud/docker.
-I installed using the provided Docker Compose file, but changed the volume mappings to `volumes : - ./cloud:/var/www/html - ./data:/var/www/html/data` so I didn't have to naviaget to /var/lib/docker/volumes/nextcloud/ to find the Nextcloud files on the Docker host.
+For this, I use the Nextcloud container that contains an Apache image to run the webserver, found <a href="https://github.com/nextcloud/docker" target="_blank">here</a>.
+I installed using the provided Docker Compose file, but changed the volume mappings to `volumes : - ./cloud:/var/www/html - ./data:/var/www/html/data` so I didn't have to navigate to `/var/lib/docker/volumes/nextcloud` to find the Nextcloud files on the Docker host.
 Anything I put in the data volume on the host will appear on `hostip:8080` on my webbrowser, and the other way around.
-Note: You need to make sure the correct permissions are set (`sudo chown -R www-data:www-data /home/lily/nextcloud && sudo chmod -R 755 /path/to/host/nextcloud`) so the Nextcloud user ('www-data') has access to the data.
-I also had some problems with data being in the Nextcloud cache but not written on the disk which prevented file sync.
-I resolved this by running some troubleshooting commands on the Docker host:
+Note: You need to make sure the correct permissions are set (`sudo chown -R www-data:www-data /home/lily/nextcloud && sudo chmod -R 755 /home/lily/nextcloud`) so the Nextcloud user ('www-data') has access to the data.
+I also had some problems with data being in the Nextcloud cache but not written on the disk after deletion of a user, which prevented file sync.
+I resolved this by running some troubleshooting commands on the Docker host inside the Nextcloud container:
 ```bash
 docker exec -u www-data nextcloud php occ files:cleanup #clear file cache in the Docker container
 docker exec -u www-data nextcloud php occ files:scan --all #rescan all files
 docker exec -u www-data nextcloud php occ maintenance:repair #maintenance repairs, eg. to fix database inconsistencies, adjust file paths, and address other issues that may arise in a Nextcloud installation
 ```
-## Portainer
-I use Portainer to have an overview and comfortable GUI management interface for all my Docker containers.
-I find creating and managing Docker networks, assigning labels to containers, as well as reviewing container logs more comfortable through Portainer.
-It also enables you to connect to a console and act as root user in the container, therefore replacing the need to use the `docker exec -it <containername> sh` command to access the container's CLI.
-Portainer can be installed by creating a volume (`docker volume create portainer_data`) and then the container for it (`docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest`).
-
-## Paperless
-I use Paperless as a document managagement system.
-I and configured it using a Docker Compose file, and added an environment file for more fine-grained configuraions with the entry `env_file: docker-compose.env`.
-The database I use with it is Redis. (This is one of the benefits of using Docker Compose - simply start the file with `services:` and define multiple services in the file.)
 
 ## Uptime Kuma
 I use Uptime Kuma, a simple yet powerful monitoring tool, to receive notifications about my services.
-You can configure lots of notification options, I chose to configure it for Mail via SMTP.
+You can configure lots of notification options, I chose to configure it for Mail via SMTP (simply google your mail provider + SMTP server)
+I gave Uptime Kuma read only rights to the Docker socket, so I can configure the Pi as a Docker Host in Uptime Kuma, and comfortably monitor all my containers
+with it. <br />
+But as I want to prevent Docker containers not running in the first place, I wrote [this script](automation.md#keep-docker-compose-containers-running) to restart them if they go down.
 I used the following Docker Compose file to install it:
 ```yml
 services:
@@ -80,14 +73,11 @@ services:
     container_name: uptime-kuma
     volumes:
       - ./uptime-kuma-data:/app/data
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro #read rights for Docker
     ports:
       - 3025:3001 
     restart: always
 ```
-and then created the `uptime-kuma-data` directory in the same parent directory.
-I gave Uptime Kuma read only rights to the Docker socket, so I can configure the Pi as a Docker Host in Uptime Kuma, and comfortably monitor all my containers
-with it.
 
 ## Watchtower
 I use Watchtower to keep my Docker containers up to date.
@@ -108,4 +98,15 @@ It also has cool API integrations, for example to display PiHole data.
 I installed it using Docker Compose, then configured it via the GUI webinterface.
 As I wanted to use a custom icon for the tab bar and on the site itself, I downloaded `dino.png` on my laptop and moved it to `~/homarr/icons` on my Pi, which I mapped to the logo directory in homarr using the line `- ./icons:/app/public/imgs/logo` under the `volumes:` section of my Docker Compose file.
 You could also connect to the container CLI, navigate to the logo directory and use `wget <icon URL>` to download the icon in the container directly.
-You can then change the icon by specifying the path to it in the 'Settings' page on the Web GUI.
+You can then change the icon by specifying the path to it (in the container) in the 'Settings' page on the Web GUI.
+
+## Portainer
+I use Portainer to have an overview and comfortable GUI management interface for all my Docker containers.
+I find creating and managing Docker networks, assigning labels to containers, as well as reviewing container logs more comfortable through Portainer.
+It also enables you to connect to a console and act as root user in the container, therefore replacing the need to use the `docker exec -it <containername> sh` command to access the container's CLI.
+Portainer can be installed by creating a volume (`docker volume create portainer_data`) and then pulling the container for it (`docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest`).
+
+## Paperless
+I use Paperless as a document managagement system.
+I configured it using a Docker Compose file, and added an environment file for more fine-grained configuraions with the entry `env_file: docker-compose.env`.
+The database I use with it is Redis. (This is one of the benefits of using Docker Compose - simply start the file with `services:` and define multiple services in the file.)

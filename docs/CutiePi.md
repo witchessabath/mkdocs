@@ -15,18 +15,17 @@ To clean up on my laptop I used the `sudo umount /mnt/pi` and `sudo rm -rf /mnt/
 ### PiHole
 I use PiHole as a DNS-based blocker from ads and malicious sites/tracking sites.
 I configured my Pi as local DNS Server on my router, so all new clients in my network automatically use it.
-I installed PiHole following https://docs.pi-hole.net/main/basic-install/. I wanted to run the web interface on a custom port, so I ran `sudo nvim /etc/lighttpd/lighttpd.conf` and searched for `server.port`. Change this value to the desired port, then access it in the browser with `http://<hostname>:<port>/admin`.
-I added new Adists from https://github.com/RPiList/specials/blob/54876178ffa7e4d1224ac81b00bedd0040f65802/Blocklisten.md here, then updated Gravity (`pihole -g`).
+I installed PiHole following <a href="https://docs.pi-hole.net/main/basic-install/" target="_blank">the official guide</a>. I wanted to run the web interface on a custom port, so I ran `sudo nvim /etc/lighttpd/lighttpd.conf` and searched for `server.port`. You can this value to the desired port, then access it in the browser with `http://<hostname>:<port>/admin`.
+I added new Adists from <a href="https://github.com/RPiList/specials/blob/54876178ffa7e4d1224ac81b00bedd0040f65802/Blocklisten.md" target="_blank">here</a>, then updated Gravity (`pihole -g`).
 I added a script and cronjob to delete the FTL database every week (`crontab -e 0 0 * * 0 FTLdb.sh`).
 ```bash
 #!/bin/bash
 
-sudo systemctl stop pihole-FTL
-sudo mv /etc/pihole/pihole-FTL.db /home/lily/scripts/pihole-FTL_$(date +"%y-%m-%d").db
-sudo systemctl start pihole-FTL
+sudo systemctl stop pihole-FTL 
+sudo mv /etc/pihole/pihole-FTL.db /home/lily/scripts/pihole-FTL_$(date +"%y-%m-%d").db #remove original DB file, create a backup file with time stamp in my scripts directory
 
 cd /home/lily/scripts
-find . -name "pihole-FTL_*.db" -type f -mtime +7 -exec rm {} \;
+find . -name "pihole-FTL_*.db" -type f -mtime +7 -exec rm {} \; #remove all files containing "pihole-FTL_" older than a week
 ```
 ### Unbound DNS
 I use Unbound as a recursive DNS Server. 
@@ -64,7 +63,7 @@ I installed Syncthing on my Pi and my Laptop. I could then access Syncthing on m
 Then I configured a folder to sync with my Pi and tried to sync the devices with the 'Add device' button.
 As my Pi is headless, I thought I could simply add it via Device ID (I looked at `man synthing`, and you can display it with `syncthing --device-id`).
 But it didn´t work, the logs said the connection was refused by my Pi.
-I then set a GUI for my Pi´s Syncthing with `syncthing --gui-address=192.168.10.53:8384`, so I could then access `cutiepi:8384` from my laptop's browser, and configured the rest from here.
+I then set a GUI for my Pi´s Syncthing with `syncthing --gui-address=<host-ip>:8384`, so I could then access `cutiepi:8384` from my laptop's browser, and configured the rest from here.
 I needed to change the default user and password on both Syncthing instances in order to sync them.
 
 ## Some notes on SSH
@@ -87,6 +86,7 @@ Host NAS
 Your client will now use these parameters to connect via SSH to these hosts.
 ## Managing disk space
 - Useful commands to manage the Pi's disk space are `df -h`and `ncdu /`. The latter provides a nice overview of all files and their sizes in the specified directory (in this case, root.)
+- To view a script I wrote to monitor the disk space and send notifications to my phone if it's over the threshold, see [here](automation.md#monitoring-disk-space)
 - Also make sure to run the apt `autoclean` and `autoremove`commands if you want to remove old packages, and package dependencies that are no longer needed.
 - I also wanted to limit the space my journal log was taking up. For this, you can run `sudo journalctl --vacuum-time=2weeks` for example, to remove records older than two weeks.
     - You can also specify the maximal usage, free space, files and file size allowed for your journal by editing `/etc/systemd/journald.conf`, eg. by uncommenting and setting the line `SystemMaxFileSize=40M`. Then restart the service using `sudo systemctl restart systemd-journald` for the changes to take effect.
