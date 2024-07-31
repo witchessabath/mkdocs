@@ -61,23 +61,11 @@ docker exec -u www-data nextcloud php occ maintenance:repair #maintenance repair
 
 ## Uptime Kuma
 I use Uptime Kuma, a simple yet powerful monitoring tool, to receive notifications about my services.
-You can configure lots of notification options, I chose to configure it for Mail via SMTP (simply google your mail provider + SMTP server)
+You can configure lots of notification options, like Mail (simply google your mail provider + SMTP server), Signal, Pushover, etc.
 I gave Uptime Kuma read only rights to the Docker socket, so I can configure the Pi as a Docker Host in Uptime Kuma, and comfortably monitor all my containers
 with it. <br />
+Another cool feature is the 'Upside Down' Status monitor, which I explain [here](scripts.md#uptime-kuma)
 But as I want to prevent Docker containers not running in the first place, I wrote [this script](automation.md#keep-docker-compose-containers-running) to restart them if they go down.
-I used the following Docker Compose file to install it:
-```yml
-services:
-  uptime-kuma:
-    image: louislam/uptime-kuma:1
-    container_name: uptime-kuma
-    volumes:
-      - ./uptime-kuma-data:/app/data
-      - /var/run/docker.sock:/var/run/docker.sock:ro #read rights for Docker
-    ports:
-      - 3025:3001 
-    restart: always
-```
 
 ## Watchtower
 I use Watchtower to keep my Docker containers up to date.

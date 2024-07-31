@@ -1,15 +1,15 @@
 # Monitoring Scripts
 
-I am working on improving my shell scripting, and making my life easier through automated monitoring is a great motivator to do that!<br />
-Currently I use [Uptime Kuma](Docker.md#uptime-kuma) as a monitoring tool and to send notifications to me.<br />
+I am working on improving my shell scripting, and making my life easier through automated monitoring is a great motivator to do that!
 
 ## Notifications
+### Uptime Kuma
+Currently I use [Uptime Kuma](Docker.md#uptime-kuma) as a monitoring tool. 
+Some things I cannot monitor with Uptime Kuma, so I wrote scripts and included a push notification to Uptime Kuma in them, so I know when a certain part of a script failed.<br />
+To do this, go to `Uptime Kuma > Add New Monitor > Monitor Type "Push"`. Scroll down and check the Box next to `Upside Down Mode`.
+The new monitor displays the push URL at the top, simply copy it and add it to your script with `curl`. Now, when the script calls the Push URL, you will now it failed. 
 
-The things I cannot monitor with Uptime Kuma, I scripted and included a push notification to Uptime Kuma in them, so I know when a certain part of a script failed.<br />
-To do this, simply go to `Uptime Kuma > Add New Monitor > Monitor Type "Push"`. Scroll down and check the Box next to `Upside Down Mode`. <br /> 
-Now, when the script calls the Push URL, you will now it failed. The new monitor displays the push URL at the top, simply copy it and add it to your script with `curl`.<br />
-
-    !!! note
+!!! note
     Make sure the client knows the hostname of the service Uptime Kuma is running on as it's included in the URL, or simply replace with localhost if the script is running on the same server as Kuma.
 
 ### Healthchecks.io
@@ -17,7 +17,6 @@ You can also use <a href="https://healthchecks.io/" target="_blank">Healthcheck.
 Healthchecks can send you success or failure messages through your chosen integration, and it can even measure job execution time.
 
 ## Scripts
-Here are some scripts I found useful:
 
 ### Monitoring disk space
 This script will monitor the disk space on my servers, and send a notification to my phone if a certain threshold is reached, using Uptime Kuma. <br />
