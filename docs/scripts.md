@@ -1,4 +1,4 @@
-# Monitoring Scripts
+# Automation
 
 I am working on improving my shell scripting, and making my life easier through automated monitoring is a great motivator to do that!
 

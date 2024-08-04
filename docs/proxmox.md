@@ -28,6 +28,19 @@ After the template has finished downloading, you can click the big `Create CT` b
     I chose 'Use Host DNS Settings' in the container setup wizard, but as I wanted to install software, I noticed DNS was not working for me. I had to manually edit the container configuration file on the pve node (`/etc/pve/lxc/<container_id>.conf`). I added the line `lxc.environment = DNS_SERVER=1.1.1.1 1.0.0.1`, then entered the container from the command line with `pct enter <container_id>` and adjusted its `/etc/resolv.conf` file to use these nameservers as well.
     Then DNS resolution worked and I could run my first `apt update && upgrade` and then install packages.
 
+## VM Setup
+In the side menu under your node, select `local` then go to `Content > ISO Images` and click `Upload`. Now you can upload an ISO from your local PC.
+Then go to `Create VM` on the top right.
+I did this as I wanted a graphical Debian install.
+### NFS Server
+I used my VM to setup an NFS Server by doing the following:
+
+- install the `nfs-kernel-server` package
+- create a directory for the share, eg. `sudo mkdir -p /srv/nfs/share` and set the permissions
+    - As I'm not doing this in a production evironment, I used `chown nobody:nogroup` and `chmod 755`
+- edit the `/etc/exports` file to specify allowed clients. I wanted to allow all clients in my network, so I added the line `/srv/nfs/share *(rw,sync,no_subtree_check)`
+- then update the NFS Server configuration by executing `exportfs -ra`
+
 ## Firewall
 In the Datacenter menu, expand the `Firewall` menu point. 
 I recommend first going to `Security Groups` and creating a new group - which is simply a set of rules. 
@@ -52,7 +65,17 @@ To deploy self signed TLS certificates:
 - navigate to `Datacenter > ACME`.
 - click `Challenge Plugins > Add` to add a DNS challenge from your provider. I use Cloudflare, so I entered my Cloudflare mail and created a Cloudflare API token.
     - to create an API token, I logged in to Cloudflare's 'My Profile' page, then navigate to 'API token' in the menu and created a token using the Zone DNS template, giving permission for zones in my account.
-- go to `Accounts > Add` and add the mail address used for the DNS Challenge Plugin. Now, select Let's Encrypt V2 from the Dropdown Menu, and the configuration is finished.
+- go to `Accounts > Add` and add the mail address used for the DNS Challenge Plugin. Now, select 'Let's Encrypt V2' from the Dropdown Menu
+- next, go to your node(s) and select `Certificates` from the side menu. Under `ACME`, click `Add` and add a domain and select 'DNS' under `Plugin Type` 
+- In the top menu, select the previously created account in the `Using account: ` dropdown menu, then click `Apply`
+![Screenshot](img/ACME.png)
+*Above: ACME configuration for my PVE node* <br />
+## Backups
+Here's how I setup a backup to my NFS Share for the VM file systems:
+
+- On your Proxmox Datacenter tab, go to `Storage` and click `Add > NFS`
+- Enter a name in the `ID` field, then enter the server IP and select the NFS Share path under `Export`. For content, make sure to select the option `VZDump backup files`
+- Then go to `Backup`, and click `Add` to add a backup job. **Select your NFS Share as storage** and determine a schedule for the backup to run. <br /> Make sure to keep more than the last backup by modifying the retention time in the `Retention` tab.
 ## Users and 2FA Authentication
 In the Datacenter Menu, go to `Permissions > Users` to create a new user. In the `Two Factor` menu point beneath that, you can set up 2FA, for example with an authenticator app.
 ## Hostname Change
