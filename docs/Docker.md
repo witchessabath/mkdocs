@@ -33,7 +33,7 @@ I use Traefik as a reverse proxy and loadbalancer.
 I also configured self-signed SSL certificates with it, using the ACME protocol.
 I did this by registering the 'witchessabath' Domain with Cloudflare, and getting **Cloudflare DNS API Key** for TLS encryption.
 To create an API token, I logged in to Cloudflare's 'My Profile' page, then navigate to `API token` in the menu and created a token using a custom template:
-![Screenshot](img/CF.png)
+![Screenshot](img/CF.png)<br />
 *Above: The seetings needed for the API Key: Zone > Zone > Read and Zone > DNS > Write* <br />
 In my Traefik Docker Compose file I then added the configuration:
 ```
@@ -97,6 +97,7 @@ The database I use with it is Redis. (This is one of the benefits of using Docke
 
 ## Troubleshooting
 Some useful troubleshooting commands:
+
 - `docker logs <container_name>` to view container logs
 - `docker compose up -d --force-recreate` to activate changes after editing the compose file of a running Docker Compose container
 - `docker exec -it <container_name> /bin/sh` to connect to the shell of the container

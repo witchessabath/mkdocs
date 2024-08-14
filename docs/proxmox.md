@@ -70,7 +70,7 @@ To deploy self signed TLS certificates:
 - go to `Accounts > Add` and add the mail address used for the DNS Challenge Plugin. Now, select 'Let's Encrypt V2' from the Dropdown Menu
 - next, go to your node(s) and select `Certificates` from the side menu. Under `ACME`, click `Add` and add a domain and select 'DNS' under `Plugin Type` 
 - In the top menu, select the previously created account in the `Using account: ` dropdown menu, then click `Apply`
-![Screenshot](img/ACME.png)
+![Screenshot](img/ACME.png)<br />
 *Above: ACME configuration for my PVE node* <br />
 ## Backups
 Here's how I setup a backup to my NFS Share for the VM file systems:
