@@ -64,7 +64,9 @@ To deploy self signed TLS certificates:
 
 - navigate to `Datacenter > ACME`.
 - click `Challenge Plugins > Add` to add a DNS challenge from your provider. I use Cloudflare, so I entered my Cloudflare mail and created a Cloudflare API token.
-    - to create an API token, I logged in to Cloudflare's 'My Profile' page, then navigate to 'API token' in the menu and created a token using the Zone DNS template, giving permission for zones in my account.
+- To create an API token, I logged in to Cloudflare's 'My Profile' page, then navigate to `API token` in the menu and created a token using a custom template:
+![Screenshot](img/CF.png)
+*Above: The seetings needed for the API Key: Zone > Zone > Read and Zone > DNS > Write* <br />
 - go to `Accounts > Add` and add the mail address used for the DNS Challenge Plugin. Now, select 'Let's Encrypt V2' from the Dropdown Menu
 - next, go to your node(s) and select `Certificates` from the side menu. Under `ACME`, click `Add` and add a domain and select 'DNS' under `Plugin Type` 
 - In the top menu, select the previously created account in the `Using account: ` dropdown menu, then click `Apply`

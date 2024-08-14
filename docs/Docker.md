@@ -3,47 +3,6 @@
 After a while of installing software locally on my Raspberry Pi, I realized the benefits of using containers instead, so I started using Docker.
 This way, I have each application installed in a sandboxed environment for more security, all dependencies come with the container so there's no "But it works on my machine!" effect, and management is very convenient with easy to manage compose or Dockerfiles that can be used with version control (Git).
 
-## Traefik
-
-### docker-compose.yml and traefik.yml
-I use Traefik as a reverse proxy and loadbalancer.
-I also configured self-signed SSL certificates with it, using the ACME protocol.
-I did it before by using **certbot**, but ACME certificates don't need to be manually renewed.
-I did this by registering the 'witchessabath' Domain with Cloudflare, setting the right TXT records, and getting the **Cloudflare Global API Key** for TLS encryption.
-In my Traefik Docker Compose file I then added:
-```
-environment:
-      - "CLOUDFLARE_EMAIL=xx@xx.com"
-      - "CLOUDFLARE_API_KEY=xxxx"
-```
-Traefik is configured in `traefik.yml`, which I mapped in my Docker Compose file under 'volumes:' (`- ./conf/traefik.yml:/etc/traefik/traefik.yml:ro`).
-You can view my Traefik configuration file <a href="https://github.com/witchessabath/containers/blob/main/traefik/conf/traefik.yml" target="_blank">here.</a>
-
-### Labels
-To use my self-signed TLS certificates for my Docker containers, I give them the following labels:
-```yml
-- traefik.enable=true
-- traefik.http.routers.paperless.entrypoints=web,websecure #configure for HTTP or HTTPS traffic/HTTPS redirection
-- traefik.http.routers.paperless.rule=Host(`app.witchessabath.com`)
-- traefik.http.routers.paperless.tls=true
-- traefik.http.routers.paperless.tls.certresolver=cloudflare #enter the name of the certificate resolver configured in traefik.yml
-```
-!!! note
-    Be careful about the backticks: I originally used single quotes instead of backticks for the 'Host' label, and ran into an error (called 'invalid rune' in Go)
-
-If a container already exists, you can also edit its labels with **Portainer**.
-Note that the containers must be in the same Docker network as the Traefik container.
-For non-Docker containers or services I didn't attach labels to, simply add the service to the traefik Docker Compose file:
-
-```yml
-portainer:
-    image: portainer/portainer-ce:latest
-    command: -H unix:///var/run/docker.sock
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
-```
 
 ## Nextcloud
 I run a Nextcloud instance in a container.
@@ -66,6 +25,43 @@ I gave Uptime Kuma read only rights to the Docker socket, so I can configure the
 with it. <br />
 Another cool feature is the 'Upside Down' Status monitor, which I explain [here](scripts.md#uptime-kuma)
 But as I want to prevent Docker containers not running in the first place, I wrote [this script](automation.md#keep-docker-compose-containers-running) to restart them if they go down.
+
+## Traefik
+
+### docker-compose.yml and traefik.yml
+I use Traefik as a reverse proxy and loadbalancer.
+I also configured self-signed SSL certificates with it, using the ACME protocol.
+I did this by registering the 'witchessabath' Domain with Cloudflare, and getting **Cloudflare DNS API Key** for TLS encryption.
+To create an API token, I logged in to Cloudflare's 'My Profile' page, then navigate to `API token` in the menu and created a token using a custom template:
+![Screenshot](img/CF.png)
+*Above: The seetings needed for the API Key: Zone > Zone > Read and Zone > DNS > Write* <br />
+In my Traefik Docker Compose file I then added the configuration:
+```
+ volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./conf/traefik.yml:/traefik.yml
+      - ./certs/acme.json:/acme.json
+    environment:
+      - CF_DNS_API_TOKEN=xxx
+```
+Traefik will now use `traefik.yml` as a configuration file.
+You can view my Traefik configuration file <a href="https://github.com/witchessabath/containers/blob/main/traefik/conf/traefik.yml" target="_blank">here.</a>
+
+### Labels
+To use my self-signed TLS certificates for my Docker containers, I give them the following labels:
+```yml
+- traefik.enable=true
+- traefik.http.routers.paperless.entrypoints=web,websecure #configure for HTTP or HTTPS traffic/HTTPS redirection
+- traefik.http.routers.paperless.rule=Host(`app.witchessabath.com`)
+- traefik.http.routers.paperless.tls=true
+- traefik.http.routers.paperless.tls.certresolver=cloudflare #enter the name of the certificate resolver configured in traefik.yml
+```
+!!! note
+    Be careful about the backticks: I originally used single quotes instead of backticks for the 'Host' label, and ran into an error (called 'invalid rune' in Go)
+
+If a container already exists, you can also edit its labels with **Portainer**.
+Note that the containers must be in the same Docker network as the Traefik container.
+For non-Docker containers or services you didn't attach labels to, simply add the service to the traefik Docker Compose file.
 
 ## Watchtower
 I use Watchtower to keep my Docker containers up to date.
@@ -98,3 +94,11 @@ Portainer can be installed by creating a volume (`docker volume create portainer
 I use Paperless as a document managagement system.
 I configured it using a Docker Compose file, and added an environment file for more fine-grained configuraions with the entry `env_file: docker-compose.env`.
 The database I use with it is Redis. (This is one of the benefits of using Docker Compose - simply start the file with `services:` and define multiple services in the file.)
+
+## Troubleshooting
+Some useful troubleshooting commands:
+- `docker logs <container_name>` to view container logs
+- `docker compose up -d --force-recreate` to activate changes after editing the compose file of a running Docker Compose container
+- `docker exec -it <container_name> /bin/sh` to connect to the shell of the container
+- `docker ps` and `docker network ls` to list running containers and Docker networks
+- `docker inspect <container_name>` and `docker network inspect <network_name>` for details about the container/network

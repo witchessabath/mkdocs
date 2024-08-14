@@ -14,7 +14,7 @@ To clean up on my laptop I used the `sudo umount /mnt/pi` and `sudo rm -rf /mnt/
 ## DNS
 ### PiHole
 I use PiHole as a DNS-based blocker from ads and malicious sites/tracking sites.
-I configured my Pi as local DNS Server on my router, so all new clients in my network automatically use it.
+Another useful feature is the oprion to configure local DNS A and CNAME records.
 I installed PiHole following <a href="https://docs.pi-hole.net/main/basic-install/" target="_blank">the official guide</a>. I wanted to run the web interface on a custom port, so I ran `sudo nvim /etc/lighttpd/lighttpd.conf` and searched for `server.port`. You can this value to the desired port, then access it in the browser with `http://<hostname>:<port>/admin`.
 I added new Adists from <a href="https://github.com/RPiList/specials/blob/54876178ffa7e4d1224ac81b00bedd0040f65802/Blocklisten.md" target="_blank">here</a>, then updated Gravity (`pihole -g`).
 I added a script and cronjob to delete the FTL database every week (`crontab -e 0 0 * * 0 FTLdb.sh`).
@@ -29,6 +29,7 @@ find . -name "pihole-FTL_*.db" -type f -mtime +7 -exec rm {} \; #remove all file
 ```
 ### Unbound DNS
 I use Unbound as a recursive DNS Server. 
+I configured my Pi as local DNS Server on my router, so all new clients in my network automatically use it.
 I followed the installation instructions from <a href="https://docs.pi-hole.net/guides/dns/unbound/" target="_blank">here</a> and added it as a custom DNS Server in the PiHole DNS configuration.
 ### DNSSEC
 I enabled the following security options in `/etc/unbound/unbound.conf.d/`:
@@ -90,4 +91,28 @@ Your client will now use these parameters to connect via SSH to these hosts.
 - Also make sure to run the apt `autoclean` and `autoremove`commands if you want to remove old packages, and package dependencies that are no longer needed.
 - I also wanted to limit the space my journal log was taking up. For this, you can run `sudo journalctl --vacuum-time=2weeks` for example, to remove records older than two weeks.
     - You can also specify the maximal usage, free space, files and file size allowed for your journal by editing `/etc/systemd/journald.conf`, eg. by uncommenting and setting the line `SystemMaxFileSize=40M`. Then restart the service using `sudo systemctl restart systemd-journald` for the changes to take effect.
-
+### Log Rotation
+You can use `logrotate` to automise log management, for example compressing logs, and deciding how long they should be kept and deleting older logs.
+You can do this by creating a `logrotate.conf` file (for all logs, or seperate .conf files for each log), which you fill with the options provided by `man logrotate`.
+For example:
+```bash
+/var/log/*.log {
+# rotate log files weekly
+weekly
+# keep 4 weeks worth of backlogs
+rotate 4
+# create new (empty) log files after rotating old ones
+create
+# use date as a suffix of the rotated file
+dateext
+# compress log files
+compress
+#max size
+size 50M
+#rm rotated logs older than <count> days
+maxage 30
+# packages drop log rotation information into this directory
+include /etc/logrotate.d
+}
+``` 
+You can then run  `logrotate -v logrotate.conf` to execute the log rotation and check on the process, and of course create a cronjob for this.
