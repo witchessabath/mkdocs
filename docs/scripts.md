@@ -13,14 +13,14 @@ The new monitor displays the push URL at the top, simply copy it and add it to y
     Make sure the client knows the hostname of the service Uptime Kuma is running on as it's included in the URL, or simply replace with localhost if the script is running on the same server as Kuma.
 
 ### Healthchecks.io
-You can also use <a href="https://healthchecks.io/" target="_blank">Healthcheck.io</a> to check if the scripts themselves ran by appending `curl --retry 3 https://hc-ping.com/your-uuid-here/$?`, or to monitor cronjobs.
+You can also use <a href="https://healthchecks.io/" target="_blank">Healthcheck.io</a> to check if the scripts themselves ran by appending `curl --retry 3 https://hc-ping.com/your-uuid-here/$?` to them, or to monitor cronjobs.
 Healthchecks can send you success or failure messages through your chosen integration, and it can even measure job execution time.
 
 ## Scripts
 
 ### Monitoring disk space
 This script will monitor the disk space on my servers, and send a notification to my phone if a certain threshold is reached, using Uptime Kuma. <br />
-I created a monitored cronjob so it will run twice a week `crontab - 0 20 * * 2,5 /home/lily/scripts/diskmonitor.sh && curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/my-uuid`, )
+I created a monitored cronjob so it will run twice a week (`crontab -e 0 20 * * 2,5 /home/lily/scripts/diskmonitor.sh && curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/my-uuid`)
 ```bash
 #!/bin/bash 
 
