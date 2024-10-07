@@ -1,7 +1,7 @@
 # Docker Containers
 
 After a while of installing software locally on my Raspberry Pi, I realized the benefits of using containers instead, so I started using Docker.
-This way, I have each application installed in a sandboxed environment for more security, all dependencies come with the container so there's no "But it works on my machine!" effect, and management is very convenient with easy to manage compose or Dockerfiles that can be used with version control (Git).
+This way, I have each application installed in a sandboxed environment for more security, all dependencies come with the container so there's no "But it works on my machine!" effect, and management is very convenient with easy to manage Compose or Dockerfiles that can be used with version control (Git).
 
 
 ## Nextcloud
