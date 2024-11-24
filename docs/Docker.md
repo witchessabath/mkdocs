@@ -17,6 +17,7 @@ docker exec -u www-data nextcloud php occ files:cleanup #clear file cache in the
 docker exec -u www-data nextcloud php occ files:scan --all #rescan all files
 docker exec -u www-data nextcloud php occ maintenance:repair #maintenance repairs, eg. to fix database inconsistencies, adjust file paths, and address other issues that may arise in a Nextcloud installation
 ```
+If you want access Nextcloud through your domain's URL, you will need to edit the `config.php` file to include `'*.yourdomain.com'` in the **trusted domains** section.
 
 ## Uptime Kuma
 I use Uptime Kuma, a simple yet powerful monitoring tool, to receive notifications about my services.
@@ -63,6 +64,8 @@ If a container already exists, you can also edit its labels with **Portainer**.
 Note that the containers must be in the same Docker network as the Traefik container.
 For non-Docker containers or services you didn't attach labels to, simply add the service to the traefik Docker Compose file.
 
+
+
 ## Watchtower
 I use Watchtower to keep my Docker containers up to date.
 Watchtower searches local or online repositories for newer versions of the installed containers, and then updates them with the exact same settings that were configured before.
@@ -73,6 +76,28 @@ docker run -d \
   -v /var/run/docker.sock:/var/run/docker.sock \
   containrrr/watchtower
 ```
+## Homeassistant
+I installed Homeassistant with the Docker Compose file provided on their <a href="https://www.home-assistant.io/installation/alternative/" target="_blank">website.</a><br/>
+Make sure to map a config directory used on your host for the config file.<br/>
+I currently only use it for the Wake On LAN integration in my home network.
+To set this up, do the following:
+- check if Wake On LAN is enabled on the target device by running `ethtools <ethernet_interface> | grep "Wake-on"`. Wake-On should return letter g for activated
+- To permanently enable WOL, add the line `post-up /usr/sbin/ethtool -s <ethernet_interface> wol g` to `/etc/network/interfaces` on the target computer
+- install the "wakeonlan" packet on your server and run a test with the `wakeonlan <target_macaddress>` command
+    it should return `Sending magic packet to 255.255.255.255:9 with <target_macaddress>`
+- add the following to your Homeassistant **configuration.yaml**:
+```
+wake_on_lan:
+
+switch:
+  - platform: wake_on_lan
+    mac: <target_macaddress>
+    name: explorer
+```
+This will create a new Entity called "Explorer" with the specified MAC address and the Wake On Lan integration.
+The entity can be found in the Web UI (host:8123) under **Settings > Devices & Services > Entities** and should already appear on your dashboard with buttons for turning the remote computer off or on.
+!!! note
+    When naming the config file, make sure it's called **configuration.yaml**. I created it as a .yml file first and the configuration could not be applied.
 ## Homarr
 ![Screenshot](img/dashboard.png)
 *Above: Screenshot of my Homarr Dashboard*
