@@ -95,10 +95,10 @@ switch:
     mac: <target_macaddress>
     name: explorer
 ```
-This will create a new Entity called "Explorer" with the specified MAC address and the Wake On Lan integration.
+This will create a new entity called "Explorer" with the specified MAC address and the Wake On Lan integration.
 The entity can be found in the Web UI (host:8123) under **Settings > Devices & Services > Entities** and should already appear on your dashboard with buttons for turning the remote computer off or on.
 !!! note
-    When naming the config file, make sure it's called **configuration.yaml**. I created it as a .yml file first and the configuration could not be applied.
+    When naming the config file, make sure it's called **configuration.yaml**. I created it as a **.yml** file first and the configuration could not be applied.
     I found this out by using the very handy `docker exec <home_assistant_container_name> hass --script check_config` command which troubleshoots the configuration for you.
 ## Homarr
 ![Screenshot](img/dashboard.png)
