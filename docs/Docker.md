@@ -81,6 +81,7 @@ I installed Homeassistant with the Docker Compose file provided on their <a href
 Make sure to map a config directory used on your host for the config file.<br/>
 I currently only use it for the Wake On LAN integration in my home network.
 To set this up, do the following:
+
 - check if Wake On LAN is enabled on the target device by running `ethtools <ethernet_interface> | grep "Wake-on"`. Wake-On should return letter g for activated
 - To permanently enable WOL, add the line `post-up /usr/sbin/ethtool -s <ethernet_interface> wol g` to `/etc/network/interfaces` on the target computer
 - install the "wakeonlan" packet on your server and run a test with the `wakeonlan <target_macaddress>` command
@@ -98,6 +99,7 @@ This will create a new Entity called "Explorer" with the specified MAC address a
 The entity can be found in the Web UI (host:8123) under **Settings > Devices & Services > Entities** and should already appear on your dashboard with buttons for turning the remote computer off or on.
 !!! note
     When naming the config file, make sure it's called **configuration.yaml**. I created it as a .yml file first and the configuration could not be applied.
+    I found this out by using the very handy `docker exec <home_assistant_container_name> hass --script check_config` command which troubleshoots the configuration for you.
 ## Homarr
 ![Screenshot](img/dashboard.png)
 *Above: Screenshot of my Homarr Dashboard*
