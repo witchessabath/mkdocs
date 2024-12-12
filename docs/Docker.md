@@ -32,21 +32,20 @@ But as I want to prevent Docker containers not running in the first place, I wro
 ### docker-compose.yml and traefik.yml
 I use Traefik as a reverse proxy and loadbalancer.
 I also configured self-signed SSL certificates with it, using the ACME protocol.
-I did this by registering the 'witchessabath' Domain with Cloudflare, and getting **Cloudflare DNS API Key** for TLS encryption.
+I did this by registering the 'witchessabath' Domain with Cloudflare, and getting a **Cloudflare DNS API Token** for TLS encryption.
 To create an API token, I logged in to Cloudflare's 'My Profile' page, then navigate to `API token` in the menu and created a token using a custom template:
 ![Screenshot](img/CF.png)<br />
 *Above: The seetings needed for the API Key: Zone > Zone > Read and Zone > DNS > Write* <br />
 In my Traefik Docker Compose file I then added the configuration:
 ```
  volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./conf/traefik.yml:/traefik.yml
-      - ./certs/acme.json:/acme.json
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./conf/traefik.yml:/traefik.yml:ro
+      -  ./certs:/etc/traefik/certs:rw
     environment:
       - CF_DNS_API_TOKEN=xxx
 ```
-Traefik will now use `traefik.yml` as a configuration file.
-You can view my Traefik configuration file <a href="https://github.com/witchessabath/containers/blob/main/traefik/conf/traefik.yml" target="_blank">here.</a>
+Traefik will now use `traefik.yml` as a configuration file and write the certificate data into the `acme.json` file in the /certs directory.
 
 ### Labels
 To use my self-signed TLS certificates for my Docker containers, I give them the following labels:
@@ -94,9 +93,14 @@ switch:
   - platform: wake_on_lan
     mac: <target_macaddress>
     name: explorer
+  
+  - platform: wake_on_lan
+    mac: <target_macaddress_2>
+    name: juno
 ```
-This will create a new entity called "Explorer" with the specified MAC address and the Wake On Lan integration.
-The entity can be found in the Web UI (host:8123) under **Settings > Devices & Services > Entities** and should already appear on your dashboard with buttons for turning the remote computer off or on.
+This will create two new entities called "explorer" and "juno" with the specified MAC addresses and the Wake On Lan integration.
+The entities can be found in the Web UI (host:8123) under **Settings > Devices & Services > Entities**. <br/>
+You can now go to your dashboard and select `Add Card > Entity` to add the WoL switches to your dashboard.
 !!! note
     When naming the config file, make sure it's called **configuration.yaml**. I created it as a **.yml** file first and the configuration could not be applied.
     I found this out by using the very handy `docker exec <home_assistant_container_name> hass --script check_config` command which troubleshoots the configuration for you.
