@@ -63,8 +63,8 @@ Go to `Services > tgt > Targets` and configure a target, with the image you just
 
 ## Samba 
 
-I also created a Samba Share on my Raspberry Pi for the home network.
-To do this, install the packages `samba samba-common smbclient` and make a backup of the /etc/samba/smb.conf file, then create a new one with your custom entries.
+I also created a Samba Share on my Raspberry Pi for my home network.
+To do this, install the packages `samba samba-common smbclient` and make a backup of the `/etc/samba/smb.conf` file, then create a new one with your custom entries.
 Mine simply looks like this:
 ```
 [global]
@@ -86,6 +86,7 @@ This gives me the Share 'Samba'. Guest accounts are allowed, so no login is need
 I wanted to set a size restriction for the Samba file share, so I decided to map it to a logical volume.
 You can map the Samba file share to any directory you want using the `path = ` option.
 To map it to a logical volume, I connected my Pi to an external SDD and did the follwing:
+
 - install `lvm2` package
 - use the `lsblk` command to find out the name of the SDD block device and create a physical volume on it using `sudo pvcreate /dev/sda`
 - create a volume group on the phyiscal volume: `vgcreate volgroup1 /dev/sda`
@@ -94,4 +95,7 @@ To map it to a logical volume, I connected my Pi to an external SDD and did the 
 - `sudo mkdir -p /mnt/sambavolume` and `sudo mount /dev/mapper/volgroup1-sambavolume /mnt/sambavolume` to mount the logical volume.
 - to make persistent after reboots, I added an entry for the volume to `/etc/fstab`: `/dev/mapper/volgroup1-sambavolume /mnt/sambavolume ext4 defaults 0 2`
 
+### Connecting to the share from Windows devices
+To connect to the share using Windows devices, simply enter `\\<serverIP>\<sambasharename>` in the file explorer or map as new network device.
+So in my case, `\\cutiepi\samba`. You are now automatically connected to whatever directory is specified as 'path' in the smb.conf file for this share.
 
