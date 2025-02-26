@@ -18,8 +18,6 @@ I did the following steps to make it work:
     Also, note that OpenWeatherMap display Temperature in Kelvin - hence the line `double temperatureC = (temperatureK - 273.15);` to convert it to Celsius.<br />
     Another tip: In the Arduino IDE, go to 'Tools -> Serial Monitor' to view the `Serial.println` lines. Make sure you have the correct Baud rate selected.
 
-![Screenshot](img/arduino.png)
-
 ## Arch Linux Configuration
 
 
