@@ -1,7 +1,7 @@
 # About
 <p>
   Hello and welcome to my tech blog!<br />
-  This is where I document all the things I do in my homelab.<br />
+   My name is Lily Sabath and this is where I document all the things I do in my homelab.<br />
   I have a passion for old hardware and SBCs, Linux operating systems, and virtualization technologies.<br />
   I love learning about IT and I love sharing that passion.
 
