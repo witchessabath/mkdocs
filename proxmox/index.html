@@ -1,0 +1,987 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../scripts/">
+      
+      
+        <link rel="next" href="../NAS/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Proxmox VE - Lily's Tech Blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#proxmox-ve" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Lily&#39;s Tech Blog" class="md-header__button md-logo" aria-label="Lily's Tech Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lily's Tech Blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Proxmox VE
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../Docker/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Docker Containers
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../scripts/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Automation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Proxmox VE
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../NAS/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  File Sharing
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../CutiePi/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Raspberry Pi
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../Backup/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Backup
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../miscellaneous/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Miscellaneous
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Lily&#39;s Tech Blog" class="md-nav__button md-logo" aria-label="Lily's Tech Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Lily's Tech Blog
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker Containers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Automation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Proxmox VE
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxmox VE
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation-and-initial-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation and initial configuration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lxc-container-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      LXC Container setup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vm-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      VM Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VM Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nfs-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      NFS Server
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#firewall" class="md-nav__link">
+    <span class="md-ellipsis">
+      Firewall
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tls-certificates" class="md-nav__link">
+    <span class="md-ellipsis">
+      TLS Certificates
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backups" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backups
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#users-and-2fa-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Users and 2FA Authentication
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hostname-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hostname Change
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NAS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    File Sharing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CutiePi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Raspberry Pi
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Backup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Backup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../miscellaneous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Miscellaneous
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation-and-initial-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation and initial configuration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lxc-container-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      LXC Container setup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vm-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      VM Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VM Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nfs-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      NFS Server
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#firewall" class="md-nav__link">
+    <span class="md-ellipsis">
+      Firewall
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tls-certificates" class="md-nav__link">
+    <span class="md-ellipsis">
+      TLS Certificates
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backups" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backups
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#users-and-2fa-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Users and 2FA Authentication
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hostname-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hostname Change
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="proxmox-ve">Proxmox VE</h1>
+<p>Here are some notes on my Proxmox instance. Proxmox is a great type I hypervisor. I mainly use it to test software I don't want to immediately install in my production homelab environment.</p>
+<h2 id="installation-and-initial-configuration">Installation and initial configuration</h2>
+<p>Here are the steps I took for a basic Proxmox install and setup to run some LXC containers:</p>
+<ul>
+<li>Download the official Proxmox VE ISO image to a bootable USB drive</li>
+<li>Go to the BIOS of your PC and enable virtualisation support<ul>
+<li>As I am running Proxmox on a HP PC with an Intel CPU, the virtualisation option to be enbled was <strong>'System Options -&gt; Virtualization Technology (VTx)'</strong></li>
+</ul>
+</li>
+<li>Go through the initial Proxmox install instructions for Proxmox VE with GUI</li>
+<li>Now Proxmox is running and can be configured on the web interface <code>https://(hostIP):8006</code></li>
+<li>Name your cluster. The host 'pve' is now a node in this cluster.</li>
+<li>Select the node in the side menu, then navigate to 'Updates &gt; Repositories'<ul>
+<li>Here you can select the software repositories your system can install packages from. There are some default repositories, here I disabled the Proxmox Enterprise repository as I have no enterprise subscription. Instead I clicked on 'Add' and added the <code>pve-no-subscription</code> repo.</li>
+<li>Now you can go back to 'Update' and click 'Refresh', then 'Upgrade'. This performs an <code>apt update &amp;&amp; upgrade</code> on the node.</li>
+<li>If you use Proxmox without a subscription, a window pops up to remind you it's not recommend. This can be disabled by changing the <code>proxmoxlib.js</code> file and then restarting the service for the webinterface (<code>pveproxy.service</code>), like in <a href="https://johnscs.com/remove-proxmox51-subscription-notice/" target="_blank">these instructions.</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="lxc-container-setup">LXC Container setup</h2>
+<p>You can run either VMs or LXC Containers (Linux Containers) on Proxmox VE.
+I chose to first deploy some containers, as I wanted to run Linux systems and containers share the same kernel with the host. This makes them really lightweight and fast.
+To deploy a container, go to the node in your sidemenu and select the menupoint <code>local</code>.
+Here you will find a sub-menu with the point <code>Container Templates</code>, where you can browse a big list of Linux images, which you can download.
+These templates can be used for deploying containers with this OS. There's also preconfigured containers that have certain software already installed.
+After the template has finished downloading, you can click the big <code>Create CT</code> button on the top right of the Web GUI. This will start a setup wizard where you can choose the node it will run on, create a user/password and SSH keys, and the virtual hardware specs.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I chose 'Use Host DNS Settings' in the container setup wizard, but as I wanted to install software, I noticed DNS was not working for me. I had to manually edit the container configuration file on the pve node (<code>/etc/pve/lxc/&lt;container_id&gt;.conf</code>). I added the line <code>lxc.environment = DNS_SERVER=1.1.1.1 1.0.0.1</code>, then entered the container from the command line with <code>pct enter &lt;container_id&gt;</code> and adjusted its <code>/etc/resolv.conf</code> file to use these nameservers as well.
+Then DNS resolution worked and I could run my first <code>apt update &amp;&amp; upgrade</code> and then install packages.</p>
+</div>
+<h2 id="vm-setup">VM Setup</h2>
+<p>In the side menu under your node, select <code>local</code> then go to <code>Content &gt; ISO Images</code> and click <code>Upload</code>. Now you can upload an ISO from your local PC.
+Then go to <code>Create VM</code> on the top right.
+I did this as I wanted a graphical Debian install.</p>
+<h3 id="nfs-server">NFS Server</h3>
+<p>I used my VM to setup an NFS Server by doing the following:</p>
+<ul>
+<li>install the <code>nfs-kernel-server</code> package</li>
+<li>create a directory for the share, eg. <code>sudo mkdir -p /srv/nfs/share</code> and set the permissions<ul>
+<li>As I'm not doing this in a production evironment, I used <code>chown nobody:nogroup</code> and <code>chmod 755</code></li>
+</ul>
+</li>
+<li>edit the <code>/etc/exports</code> file to specify allowed clients. I wanted to allow all clients in my network, so I added the line <code>/srv/nfs/share *(rw,sync,no_subtree_check)</code></li>
+<li>then update the NFS Server configuration by executing <code>exportfs -ra</code></li>
+</ul>
+<h2 id="firewall">Firewall</h2>
+<p>In the Datacenter menu, expand the <code>Firewall</code> menu point. 
+I recommend first going to <code>Security Groups</code> and creating a new group - which is simply a set of rules. 
+These can then later be added to both the node(s) and the VMs/Containers running on the system. This is very practical, as you don't have to create some standard rules over and over again to apply to different nodes or VMs.
+In the Security Group, you can click the <code>Add</code> button to create rules. A window will pop up with the option to create rules applying either a predefined Macro (e.g. HTTPS or FTP), or by selecting the protocol. <br />
+You can add seperate rules on every layer of the system, from the whole datacenter to a single container. They will be applied from the first rule on the <code>Firewall</code> menu down to the last rule, so be careful about your rule order.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>An important aspect in Proxmox is that you should create these rules first and then enable the firewall - because it's disabled by default.
+You can do so in the <code>Firewall &gt; Options</code> menu. Be careful if you enable the firewall before creating any rules - because the default policy is set to <code>DROP</code> (but can be changed here). So you might accidentally lock yourself out of your system, if you don't create some <code>ACCEPT</code> rules first. <br /></p>
+</div>
+<p><img alt="Screenshot" src="../img/Screenshot4.png" />
+<em>Above: The Firewall Options menu, where the firewall must first be enabled on the Datacenter level</em> <br />
+I created a Security Group for my VPN connection to allow HTTP, HTTPS, and TCP traffic on port 8006 to allow access to Proxmox from my VPN.
+(This is very practical as I also enabled Wake on LAN fo the Proxmox node, and now I can access my containers from anywhere when I need them, without having to keep the PC running 24/7.)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Be sure to create the rule for port 8006/the port where the Proxmox VE API is exposed: otherwise you won't be able to access the Proxmox web interface, even with HTTP(S) enabled. <br /></p>
+</div>
+<p><img alt="Screenshot" src="../img/fw.png" /> <br />
+<em>Above: Screenshot of a VPN security group, made by selecting Macros (HTTP/HTTPS) or a protocol and destination port (TCP to port 8006).</em> <br /></p>
+<h2 id="tls-certificates">TLS Certificates</h2>
+<p>To deploy self signed TLS certificates:</p>
+<ul>
+<li>navigate to <code>Datacenter &gt; ACME</code>.</li>
+<li>click <code>Challenge Plugins &gt; Add</code> to add a DNS challenge from your provider. I use Cloudflare, so I entered my Cloudflare mail and created a Cloudflare API token.</li>
+<li>To create an API token, I logged in to Cloudflare's 'My Profile' page, then navigate to <code>API token</code> in the menu and created a token using a custom template:
+<img alt="Screenshot" src="../img/CF.png" />
+<em>Above: The seetings needed for the API Key: Zone &gt; Zone &gt; Read and Zone &gt; DNS &gt; Write</em> <br /></li>
+<li>go to <code>Accounts &gt; Add</code> and add the mail address used for the DNS Challenge Plugin. Now, select 'Let's Encrypt V2' from the Dropdown Menu</li>
+<li>next, go to your node(s) and select <code>Certificates</code> from the side menu. Under <code>ACME</code>, click <code>Add</code> and add a domain and select 'DNS' under <code>Plugin Type</code> </li>
+<li>In the top menu, select the previously created account in the <code>Using account:</code> dropdown menu, then click <code>Apply</code>
+<img alt="Screenshot" src="../img/ACME.png" /><br />
+<em>Above: ACME configuration for my PVE node</em> <br /></li>
+</ul>
+<h2 id="backups">Backups</h2>
+<p>Here's how I setup a backup to my NFS Share for the VM file systems:</p>
+<ul>
+<li>On your Proxmox Datacenter tab, go to <code>Storage</code> and click <code>Add &gt; NFS</code></li>
+<li>Enter a name in the <code>ID</code> field, then enter the server IP and select the NFS Share path under <code>Export</code>. For content, make sure to select the option <code>VZDump backup files</code></li>
+<li>Then go to <code>Backup</code>, and click <code>Add</code> to add a backup job. <strong>Select your NFS Share as storage</strong> and determine a schedule for the backup to run. <br /> Make sure to keep more than the last backup by modifying the retention time in the <code>Retention</code> tab.</li>
+</ul>
+<h2 id="users-and-2fa-authentication">Users and 2FA Authentication</h2>
+<p>In the Datacenter Menu, go to <code>Permissions &gt; Users</code> to create a new user. In the <code>Two Factor</code> menu point beneath that, you can set up 2FA, for example with an authenticator app.</p>
+<h2 id="hostname-change">Hostname Change</h2>
+<p>I changed the hostname using the <code>hostnamectl set-hostname</code> command, but I did not realize that in Proxmox, the hostname is also the node name.
+That's why after a reboot, the naming was no longer consistent and I could no longer access the web interface. Instead, you need to edit both <code>/etc/hosts</code> and <code>/etc/hostname</code> and replace all instances of the old hostname.
+If your node is in a cluster, make sure to also change the node name in <code>/etc/pve/corosync.conf</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2024 <a href="https://github.com/witchessabath" target="_blank" rel="noopener">Lily Sabath</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

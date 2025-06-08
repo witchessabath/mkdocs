@@ -1,0 +1,1050 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../scripts/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Docker Containers - Lily's Tech Blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#docker-containers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Lily&#39;s Tech Blog" class="md-header__button md-logo" aria-label="Lily's Tech Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lily's Tech Blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Docker Containers
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Docker Containers
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../scripts/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Automation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../proxmox/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Proxmox VE
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../NAS/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  File Sharing
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../CutiePi/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Raspberry Pi
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../Backup/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Backup
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../miscellaneous/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Miscellaneous
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Lily&#39;s Tech Blog" class="md-nav__button md-logo" aria-label="Lily's Tech Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Lily's Tech Blog
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Docker Containers
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker Containers
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#nextcloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nextcloud
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uptime-kuma" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uptime Kuma
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traefik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Traefik
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Traefik">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-composeyml-and-traefikyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      docker-compose.yml and traefik.yml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Labels
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#watchtower" class="md-nav__link">
+    <span class="md-ellipsis">
+      Watchtower
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#homeassistant" class="md-nav__link">
+    <span class="md-ellipsis">
+      Homeassistant
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#homarr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Homarr
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#portainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Portainer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paperless" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paperless
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Automation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proxmox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxmox VE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NAS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    File Sharing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CutiePi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Raspberry Pi
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Backup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Backup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../miscellaneous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Miscellaneous
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#nextcloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nextcloud
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uptime-kuma" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uptime Kuma
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traefik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Traefik
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Traefik">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-composeyml-and-traefikyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      docker-compose.yml and traefik.yml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Labels
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#watchtower" class="md-nav__link">
+    <span class="md-ellipsis">
+      Watchtower
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#homeassistant" class="md-nav__link">
+    <span class="md-ellipsis">
+      Homeassistant
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#homarr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Homarr
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#portainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Portainer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paperless" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paperless
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="docker-containers">Docker Containers</h1>
+<p>After a while of installing software locally on my Raspberry Pi, I realized the benefits of using containers instead, so I started using Docker.
+This way, I have each application installed in a sandboxed environment for more security, all dependencies come with the container so there's no "But it works on my machine!" effect, and management is very convenient with easy to manage Compose or Dockerfiles that can be used with version control (Git).</p>
+<h2 id="nextcloud">Nextcloud</h2>
+<p>I run a Nextcloud instance in a container.
+For this, I use the Nextcloud container that contains an Apache image to run the webserver, found <a href="https://github.com/nextcloud/docker" target="_blank">here</a>.
+I installed using the provided Docker Compose file, but changed the volume mappings to <code>volumes : - ./cloud:/var/www/html - ./data:/var/www/html/data</code> so I didn't have to navigate to <code>/var/lib/docker/volumes/nextcloud</code> to find the Nextcloud files on the Docker host.
+Anything I put in the data volume on the host will appear on <code>hostip:8080</code> on my webbrowser, and the other way around.
+Note: You need to make sure the correct permissions are set (<code>sudo chown -R www-data:www-data /home/lily/nextcloud &amp;&amp; sudo chmod -R 755 /home/lily/nextcloud</code>) so the Nextcloud user ('www-data') has access to the data.
+I also had some problems with data being in the Nextcloud cache but not written on the disk after deletion of a user, which prevented file sync.
+I resolved this by running some troubleshooting commands on the Docker host inside the Nextcloud container:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>nextcloud<span class="w"> </span>php<span class="w"> </span>occ<span class="w"> </span>files:cleanup<span class="w"> </span><span class="c1">#clear file cache in the Docker container</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>nextcloud<span class="w"> </span>php<span class="w"> </span>occ<span class="w"> </span>files:scan<span class="w"> </span>--all<span class="w"> </span><span class="c1">#rescan all files</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>nextcloud<span class="w"> </span>php<span class="w"> </span>occ<span class="w"> </span>maintenance:repair<span class="w"> </span><span class="c1">#maintenance repairs, eg. to fix database inconsistencies, adjust file paths, and address other issues that may arise in a Nextcloud installation</span>
+</code></pre></div>
+If you want access Nextcloud through your domain's URL, you will need to edit the <code>config.php</code> file to include <code>'*.yourdomain.com'</code> in the <strong>trusted domains</strong> section.</p>
+<h2 id="uptime-kuma">Uptime Kuma</h2>
+<p>I use Uptime Kuma, a simple yet powerful monitoring tool, to receive notifications about my services.
+You can configure lots of notification options, like Mail (simply google your mail provider + SMTP server), Signal, Pushover, etc.
+I gave Uptime Kuma read only rights to the Docker socket, so I can configure the Pi as a Docker Host in Uptime Kuma, and comfortably monitor all my containers
+with it. <br />
+Another cool feature is the 'Upside Down' Status monitor, which I explain <a href="../scripts/#uptime-kuma">here</a>
+But as I want to prevent Docker containers not running in the first place, I wrote <a href="automation.md#keep-docker-compose-containers-running">this script</a> to restart them if they go down.</p>
+<h2 id="traefik">Traefik</h2>
+<h3 id="docker-composeyml-and-traefikyml">docker-compose.yml and traefik.yml</h3>
+<p>I use Traefik as a reverse proxy and loadbalancer.
+I also configured self-signed SSL certificates with it, using the ACME protocol.
+I did this by registering the 'witchessabath' Domain with Cloudflare, and getting a <strong>Cloudflare DNS API Token</strong> for TLS encryption.
+To create an API token, I logged in to Cloudflare's 'My Profile' page, then navigate to <code>API token</code> in the menu and created a token using a custom template:
+<img alt="Screenshot" src="../img/CF.png" /><br />
+<em>Above: The seetings needed for the API Key: Zone &gt; Zone &gt; Read and Zone &gt; DNS &gt; Write</em> <br />
+In my Traefik Docker Compose file I then added the configuration:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a> volumes:
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>      - /var/run/docker.sock:/var/run/docker.sock
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>      - ./conf/traefik.yml:/traefik.yml:ro
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>      -  ./certs:/etc/traefik/certs:rw
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    environment:
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>      - CF_DNS_API_TOKEN=xxx
+</code></pre></div>
+Traefik will now use <code>traefik.yml</code> as a configuration file and write the certificate data into the <code>acme.json</code> file in the /certs directory.</p>
+<h3 id="labels">Labels</h3>
+<p>To use my self-signed TLS certificates for my Docker containers, I give them the following labels:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>- traefik.enable=true
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>- traefik.http.routers.paperless.entrypoints=web,websecure #configure for HTTP or HTTPS traffic/HTTPS redirection
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>- traefik.http.routers.paperless.rule=Host(`app.witchessabath.com`)
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>- traefik.http.routers.paperless.tls=true
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>- traefik.http.routers.paperless.tls.certresolver=cloudflare #enter the name of the certificate resolver configured in traefik.yml
+</code></pre></div></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Be careful about the backticks: I originally used single quotes instead of backticks for the 'Host' label, and ran into an error (called 'invalid rune' in Go)</p>
+</div>
+<p>If a container already exists, you can also edit its labels with <strong>Portainer</strong>.
+Note that the containers must be in the same Docker network as the Traefik container.
+For non-Docker containers or services you didn't attach labels to, simply add the service to the traefik Docker Compose file.</p>
+<h2 id="watchtower">Watchtower</h2>
+<p>I use Watchtower to keep my Docker containers up to date.
+Watchtower searches local or online repositories for newer versions of the installed containers, and then updates them with the exact same settings that were configured before.
+Watchtower is itself a container installed with 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker run -d \
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  --name watchtower \
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  -v /var/run/docker.sock:/var/run/docker.sock \
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  containrrr/watchtower
+</code></pre></div></p>
+<h2 id="homeassistant">Homeassistant</h2>
+<p>I installed Homeassistant with the Docker Compose file provided on their <a href="https://www.home-assistant.io/installation/alternative/" target="_blank">website.</a><br/>
+Make sure to map a config directory used on your host for the config file.<br/>
+I currently only use it for the Wake On LAN integration in my home network.
+To set this up, do the following:</p>
+<ul>
+<li>check if Wake On LAN is enabled on the target device by running <code>ethtools &lt;ethernet_interface&gt; | grep "Wake-on"</code>. Wake-On should return letter g for activated</li>
+<li>To permanently enable WOL, add the line <code>post-up /usr/sbin/ethtool -s &lt;ethernet_interface&gt; wol g</code> to <code>/etc/network/interfaces</code> on the target computer</li>
+<li>install the "wakeonlan" packet on your server and run a test with the <code>wakeonlan &lt;target_macaddress&gt;</code> command
+    it should return <code>Sending magic packet to 255.255.255.255:9 with &lt;target_macaddress&gt;</code></li>
+<li>add the following to your Homeassistant <strong>configuration.yaml</strong>:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>wake_on_lan:
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>switch:
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  - platform: wake_on_lan
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    mac: &lt;target_macaddress&gt;
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    name: explorer
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>  - platform: wake_on_lan
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    mac: &lt;target_macaddress_2&gt;
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    name: juno
+</code></pre></div>
+This will create two new entities called "explorer" and "juno" with the specified MAC addresses and the Wake On Lan integration.
+The entities can be found in the Web UI (host:8123) under <strong>Settings &gt; Devices &amp; Services &gt; Entities</strong>. <br/>
+You can now go to your dashboard and select <code>Add Card &gt; Entity</code> to add the WoL switches to your dashboard.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When naming the config file, make sure it's called <strong>configuration.yaml</strong>. I created it as a <strong>.yml</strong> file first and the configuration could not be applied.
+I found this out by using the very handy <code>docker exec &lt;home_assistant_container_name&gt; hass --script check_config</code> command which troubleshoots the configuration for you.</p>
+</div>
+<h2 id="homarr">Homarr</h2>
+<p><img alt="Screenshot" src="../img/dashboard.png" />
+<em>Above: Screenshot of my Homarr Dashboard</em></p>
+<p>I use Homarr to have a dashboard overview of the services I need to access on my Pi.
+It also has cool API integrations, for example to display PiHole data.
+I installed it using Docker Compose, then configured it via the GUI webinterface.
+As I wanted to use a custom icon for the tab bar and on the site itself, I downloaded <code>dino.png</code> on my laptop and moved it to <code>~/homarr/icons</code> on my Pi, which I mapped to the logo directory in homarr using the line <code>- ./icons:/app/public/imgs/logo</code> under the <code>volumes:</code> section of my Docker Compose file.
+You could also connect to the container CLI, navigate to the logo directory and use <code>wget &lt;icon URL&gt;</code> to download the icon in the container directly.
+You can then change the icon by specifying the path to it (in the container) in the 'Settings' page on the Web GUI.</p>
+<h2 id="portainer">Portainer</h2>
+<p>I use Portainer to have an overview and comfortable GUI management interface for all my Docker containers.
+I find creating and managing Docker networks, assigning labels to containers, as well as reviewing container logs more comfortable through Portainer.
+It also enables you to connect to a console and act as root user in the container, therefore replacing the need to use the <code>docker exec -it &lt;containername&gt; sh</code> command to access the container's CLI.
+Portainer can be installed by creating a volume (<code>docker volume create portainer_data</code>) and then pulling the container for it (<code>docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest</code>).</p>
+<h2 id="paperless">Paperless</h2>
+<p>I use Paperless as a document managagement system.
+I configured it using a Docker Compose file, and added an environment file for more fine-grained configuraions with the entry <code>env_file: docker-compose.env</code>.
+The database I use with it is Redis. (This is one of the benefits of using Docker Compose - simply start the file with <code>services:</code> and define multiple services in the file.)</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>Some useful troubleshooting commands:</p>
+<ul>
+<li><code>docker logs &lt;container_name&gt;</code> to view container logs</li>
+<li><code>docker compose up -d --force-recreate</code> to activate changes after editing the compose file of a running Docker Compose container</li>
+<li><code>docker exec -it &lt;container_name&gt; /bin/sh</code> to connect to the shell of the container</li>
+<li><code>docker ps</code> and <code>docker network ls</code> to list running containers and Docker networks</li>
+<li><code>docker inspect &lt;container_name&gt;</code> and <code>docker network inspect &lt;network_name&gt;</code> for details about the container/network</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2024 <a href="https://github.com/witchessabath" target="_blank" rel="noopener">Lily Sabath</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

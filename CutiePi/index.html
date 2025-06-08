@@ -1,0 +1,1063 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../NAS/">
+      
+      
+        <link rel="next" href="../Backup/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Raspberry Pi - Lily's Tech Blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#raspberry-pi" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Lily&#39;s Tech Blog" class="md-header__button md-logo" aria-label="Lily's Tech Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lily's Tech Blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Raspberry Pi
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../Docker/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Docker Containers
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../scripts/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Automation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../proxmox/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Proxmox VE
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../NAS/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  File Sharing
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Raspberry Pi
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../Backup/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Backup
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../miscellaneous/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Miscellaneous
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Lily&#39;s Tech Blog" class="md-nav__button md-logo" aria-label="Lily's Tech Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Lily's Tech Blog
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker Containers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Automation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proxmox/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Proxmox VE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NAS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    File Sharing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Raspberry Pi
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Raspberry Pi
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#operating-system-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operating System &amp; Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DNS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pihole" class="md-nav__link">
+    <span class="md-ellipsis">
+      PiHole
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unbound-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unbound DNS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dnssec" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNSSEC
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vpn-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      VPN Server
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VPN Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dyndns" class="md-nav__link">
+    <span class="md-ellipsis">
+      DynDNS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syncthing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syncthing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#some-notes-on-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      Some notes on SSH
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#managing-disk-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      Managing disk space
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Managing disk space">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#log-rotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Log Rotation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Backup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Backup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../miscellaneous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Miscellaneous
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#operating-system-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operating System &amp; Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DNS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pihole" class="md-nav__link">
+    <span class="md-ellipsis">
+      PiHole
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unbound-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unbound DNS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dnssec" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNSSEC
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vpn-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      VPN Server
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VPN Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dyndns" class="md-nav__link">
+    <span class="md-ellipsis">
+      DynDNS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syncthing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syncthing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#some-notes-on-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      Some notes on SSH
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#managing-disk-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      Managing disk space
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Managing disk space">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#log-rotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Log Rotation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="raspberry-pi">Raspberry Pi</h1>
+<p>Here you can find all the projects I did or am currently working on with my little Raspberry Pi, aka "CutiePi"!
+I am currently running most of them as Docker Containers, but this page is dedicated to the bare metal installs.</p>
+<h2 id="operating-system-troubleshooting">Operating System &amp; Troubleshooting</h2>
+<p>I use Raspberry Pi OS Lite, a Debian ARM based distro and the official OS from the Raspberry Pi Foundation.
+I used to have DietPi OS installed, but ran into problems after the Debian Bookworm release. I couldn´t boot my Pi anymore, so I put the SD card into my laptop
+and mounted it to a new directory. To do this, I fist created the directory with <code>mkdir /mnt/pi</code> and then ran <code>lsblk</code> to find out the device name of the SD card. Then I mounted it to the directory with <code>sudo mnt /dev/sdX /mnt/pi</code>. I got a 'wrong fs type' error, so I used <code>mkfs -t ext4 /dev/sdX</code> to create the ext4 filesystem on it. It worked an I could now mount the card to the /mnt/pi directory and access all my files.
+Of course you can also just reinstall from backup, however I found this method interesting and like the flexibility that having your entire OS on an SD card offers.
+I then installed Raspberry Pi OS Lite on the SD card and enabled SSH on it, to copy all my config files to the Pi from my Laptop, using the 'secure copy' command:<code>scp /mnt/pi/neededfiles lily@cutiepi:/home/lily/configfiles</code>.
+To clean up on my laptop I used the <code>sudo umount /mnt/pi</code> and <code>sudo rm -rf /mnt/pi</code> commands.</p>
+<h2 id="dns">DNS</h2>
+<h3 id="pihole">PiHole</h3>
+<p>I use PiHole as a DNS-based blocker from ads and malicious sites/tracking sites.
+Another useful feature is the oprion to configure local DNS A and CNAME records.
+I installed PiHole following <a href="https://docs.pi-hole.net/main/basic-install/" target="_blank">the official guide</a>. I wanted to run the web interface on a custom port, so I ran <code>sudo nvim /etc/lighttpd/lighttpd.conf</code> and searched for <code>server.port</code>. You can this value to the desired port, then access it in the browser with <code>http://&lt;hostname&gt;:&lt;port&gt;/admin</code>.
+I added new Adists from <a href="https://github.com/RPiList/specials/blob/54876178ffa7e4d1224ac81b00bedd0040f65802/Blocklisten.md" target="_blank">here</a>, then updated Gravity (<code>pihole -g</code>).
+I added a script and cronjob to delete the FTL database every week (<code>crontab -e 0 0 * * 0 FTLdb.sh</code>).
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>pihole-FTL<span class="w"> </span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>sudo<span class="w"> </span>mv<span class="w"> </span>/etc/pihole/pihole-FTL.db<span class="w"> </span>/home/lily/scripts/pihole-FTL_<span class="k">$(</span>date<span class="w"> </span>+<span class="s2">&quot;%y-%m-%d&quot;</span><span class="k">)</span>.db<span class="w"> </span><span class="c1">#remove original DB file, create a backup file with time stamp in my scripts directory</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nb">cd</span><span class="w"> </span>/home/lily/scripts
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;pihole-FTL_*.db&quot;</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-mtime<span class="w"> </span>+7<span class="w"> </span>-exec<span class="w"> </span>rm<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span><span class="w"> </span><span class="c1">#remove all files containing &quot;pihole-FTL_&quot; older than a week</span>
+</code></pre></div></p>
+<h3 id="unbound-dns">Unbound DNS</h3>
+<p>I use Unbound as a recursive DNS Server. 
+I configured my Pi as local DNS Server on my router, so all new clients in my network automatically use it.
+I followed the installation instructions from <a href="https://docs.pi-hole.net/guides/dns/unbound/" target="_blank">here</a> and added it as a custom DNS Server in the PiHole DNS configuration.</p>
+<h3 id="dnssec">DNSSEC</h3>
+<p>I enabled the following security options in <code>/etc/unbound/unbound.conf.d/</code>:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>server:
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    harden-below-nxdomain: yes
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    harden-referral-path: yes
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    harden-algo-downgrade: no
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    use-caps-for-id: no
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    hide-identity: yes
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    hide-version: yes
+</code></pre></div>
+To generate DNSSEC keys, run <code>sudo unbound-control-setup</code>, then restart unbound with <code>sudo systemctl restart unbound.service</code>.
+Using <code>dig +dnssec A www.dnssec.cz</code> you can test if DNSSEC works. The result should contain the <code>ad</code> parameter.</p>
+<h2 id="vpn-server">VPN Server</h2>
+<p>I used PiVPN to turn my Pi into a VPN Server with Wireguard protocol. Now I can establish a secure connection into my home network at any time.
+After the inital installation, clients can be added with <code>pivpn -a</code>. I added my phone and laptop as a client.
+I downloaded the Wireguard App on my phone, then generated a QR code with <code>pivpn -qr</code> to establish the VPN tunnel.
+For my laptop, I copied the .conf file generated by PiVPN to my laptop using secure copy:
+<code>scp lily@cutiepi:configs/laptop.conf ~/pivpn</code>.
+I changed the Wireguard default port, as some networks block default VPN ports. It can be done either in the PiVPN installation wizard or later in the <code>/etc/wireguard/wg0.conf</code> <code>/etc/pivpn/setupVars.conf</code> files, but make sure to do this before generating the config files for the clients!
+Also make sure to enable port forwarding for the Pi on your router, so the port is accessible from outside the local network.</p>
+<h3 id="dyndns">DynDNS</h3>
+<p>As my ISP changes my public IP address, I need a dynamic DNS client to make sure I can always reach my VPN Server.
+I registered with 'NoIP' for a DynDNS Service and then configured it on my router, so my home network has a domain name it can always be reached on, even if the IP address changes.</p>
+<h2 id="syncthing">Syncthing</h2>
+<p>I use Syncthing to sync files from my Pi to my Laptop, which is especially handy via VPN.
+I installed Syncthing on my Pi and my Laptop. I could then access Syncthing on my Laptop browser via <code>http://localhost:8384/</code>.
+Then I configured a folder to sync with my Pi and tried to sync the devices with the 'Add device' button.
+As my Pi is headless, I thought I could simply add it via Device ID (I looked at <code>man synthing</code>, and you can display it with <code>syncthing --device-id</code>).
+But it didn´t work, the logs said the connection was refused by my Pi.
+I then set a GUI for my Pi´s Syncthing with <code>syncthing --gui-address=&lt;host-ip&gt;:8384</code>, so I could then access <code>cutiepi:8384</code> from my laptop's browser, and configured the rest from here.
+I needed to change the default user and password on both Syncthing instances in order to sync them.</p>
+<h2 id="some-notes-on-ssh">Some notes on SSH</h2>
+<p>I would strongly recommend taking a look at SSH, as you will be using it a lot in a headless setup.
+I made sure to change modify the default SSH settings provided in <code>/etc/ssh/sshd_config</code>. I uncommented and changed <code>Port</code> to a custom port and <code>PasswordAuthentication</code> as well as <code>PermitRootLogin</code> to 'no'.
+Of course, when disabling Password Authentication, you need to make sure you have SSH keys setup with all devices you will connect to the Pi with.
+A good instruction for SSH key setup can be found <a href="https://www.linode.com/docs/guides/use-public-key-authentication-with-ssh/" target="_blank">here.</a>
+I also made a SSH config file on my clients so it's less work connecting to multiple servers, as you don't need to remember all the custom ports and so on: <code>nvim ~/.ssh/config</code> and then create entries in the following format:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Host CutiePi
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    HostName 192.168.10.xx
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    User Lily
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    IdentityFile ~/.ssh/lilyskey #enter the path to the private key
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    Port xxx #enter the custom SSH Port you set
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>Host NAS
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    HostName 192.168.10.55
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    ...
+</code></pre></div>
+Your client will now use these parameters to connect via SSH to these hosts.</p>
+<h2 id="managing-disk-space">Managing disk space</h2>
+<ul>
+<li>Useful commands to manage the Pi's disk space are <code>df -h</code>and <code>ncdu /</code>. The latter provides a nice overview of all files and their sizes in the specified directory (in this case, root.)</li>
+<li>To view a script I wrote to monitor the disk space and send notifications to my phone if it's over the threshold, see <a href="automation.md#monitoring-disk-space">here</a></li>
+<li>Also make sure to run the apt <code>autoclean</code> and <code>autoremove</code>commands if you want to remove old packages, and package dependencies that are no longer needed.</li>
+<li>I also wanted to limit the space my journal log was taking up. For this, you can run <code>sudo journalctl --vacuum-time=2weeks</code> for example, to remove records older than two weeks.<ul>
+<li>You can also specify the maximal usage, free space, files and file size allowed for your journal by editing <code>/etc/systemd/journald.conf</code>, eg. by uncommenting and setting the line <code>SystemMaxFileSize=40M</code>. Then restart the service using <code>sudo systemctl restart systemd-journald</code> for the changes to take effect.</li>
+</ul>
+</li>
+</ul>
+<h3 id="log-rotation">Log Rotation</h3>
+<p>You can use <code>logrotate</code> to automise log management, for example compressing logs, and deciding how long they should be kept and deleting older logs.
+You can do this by creating a <code>logrotate.conf</code> file (for all logs, or seperate .conf files for each log), which you fill with the options provided by <code>man logrotate</code>.
+For example:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>/var/log/*.log<span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># rotate log files weekly</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>weekly
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># keep 4 weeks worth of backlogs</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>rotate<span class="w"> </span><span class="m">4</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1"># create new (empty) log files after rotating old ones</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>create
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># use date as a suffix of the rotated file</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>dateext
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># compress log files</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>compress
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="c1">#max size</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>size<span class="w"> </span>50M
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="c1">#rm rotated logs older than &lt;count&gt; days</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>maxage<span class="w"> </span><span class="m">30</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="c1"># packages drop log rotation information into this directory</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>include<span class="w"> </span>/etc/logrotate.d
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="o">}</span>
+</code></pre></div>
+You can then run  <code>logrotate -v logrotate.conf</code> to execute the log rotation and check on the process, and of course create a cronjob for this.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2024 <a href="https://github.com/witchessabath" target="_blank" rel="noopener">Lily Sabath</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
