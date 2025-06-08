@@ -1,6 +1,6 @@
-# Scripts
+# Automation
 
-I am working on improving my shell scripting, and making my life easier through automated monitoring is a great motivator to do that!
+Some simple scripts and Ansible files I wrote for automation purposes.
 
 ## Notifications
 ### Uptime Kuma
@@ -94,4 +94,51 @@ if pgrep "$process" > /dev/null 2>&1; then
 else
     echo "Process is not running."
 fi
+```
+
+## Ansible
+
+I have a short Ansible playbook for updating my Linux hosts.
+Prerequisites are:
+
+- installation of the `ansible-core` package
+- root ssh keys to enable root login to remote machines via ssh 
+
+I created the following `tasks.yaml` file for the updates:
+```
+---
+- name: Update servers
+  hosts: linuxhosts
+  remote_user: root
+
+  tasks:
+  - name: apt update
+    ansible.builtin.apt:
+      update_cache: true
+
+  - name: apt upgrade
+    ansible.builtin.apt:
+      upgrade: "safe"
+
+  - name: apt autoremove
+    ansible.builtin.apt:
+      autoremove: true
+```
+You can run this playbook using `ansible-playbook -i hosts.ini tasks.yaml`. Make sure you have a hostgroup in the hosts.ini file called 'linuxhosts'.
+I automated the updates with the following script:
+```
+#!/bin/bash
+
+# cd to the directory containing the playbook and hosts file
+cd /home/lily/ansible/update/ || exit 1
+# execute the playbook
+ansible-playbook -i hosts.ini tasks.yaml
+
+# check if last command was successful. If not, send a push notification to Uptime Kuma
+if [[ $? -eq 0 ]]; then
+  echo "Linux Hosts were updated automatically"
+else
+  curl "http://cutiepi:3025/api/push/stAo7759Ml"
+fi
+cd ~
 ```
